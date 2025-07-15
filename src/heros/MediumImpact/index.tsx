@@ -1,51 +1,3 @@
-// import React from 'react'
-
-// import type { Page } from '@/payload-types'
-
-// import { CMSLink } from '@/components/Link'
-// import { Media } from '@/components/Media'
-// import RichText from '@/components/RichText'
-
-// export const MediumImpactHero: React.FC<Page['hero']> = ({ links, media, richText }) => {
-//   return (
-//     <div className="">
-//       <div className="container mb-8">
-//         {richText && <RichText className="mb-6" data={richText} enableGutter={false} />}
-
-//         {Array.isArray(links) && links.length > 0 && (
-//           <ul className="flex gap-4">
-//             {links.map(({ link }, i) => {
-//               return (
-//                 <li key={i}>
-//                   <CMSLink {...link} />
-//                 </li>
-//               )
-//             })}
-//           </ul>
-//         )}
-//       </div>
-//       <div className="container ">
-//         {media && typeof media === 'object' && (
-//           <div>
-//             <Media
-//               className="-mx-4 md:-mx-8 2xl:-mx-16"
-//               imgClassName=""
-//               priority
-//               resource={media}
-//             />
-//             {media?.caption && (
-//               <div className="mt-3">
-//                 <RichText data={media.caption} enableGutter={false} />
-//               </div>
-//             )}
-//           </div>
-//         )}
-//       </div>
-//     </div>
-//   )
-// }
-
-///////////////////// heeeeereeee
 'use client'
 
 import React, { useEffect, useState } from 'react'
@@ -98,9 +50,15 @@ export const MediumImpactHero: React.FC<Page['hero']> = ({ links, media, richTex
         {richText && (
           <div className="mb-8">
             <RichText
-              className="prose prose-invert prose-lg max-w-none"
               data={richText}
               enableGutter={false}
+              className="
+                      prose prose-invert prose-lg max-w-none
+                      [&>h1]:text-5xl [&>h1]:md:text-7xl [&>h1]:font-black [&>h1]:leading-tight [&>h1]:mb-6
+                      [&>h1]:bg-gradient-to-r [&>h1]:from-white [&>h1]:via-blue-100 [&>h1]:to-white
+                      [&>h1]:bg-clip-text [&>h1]:text-transparent [&>h1]:drop-shadow-2xl
+                      [&>p]:text-xl [&>p]:md:text-2xl [&>p]:leading-relaxed [&>p]:mb-6 [&>p]:text-blue-50/90
+                    "
             />
           </div>
         )}

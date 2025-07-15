@@ -13,7 +13,7 @@ export const TextImageGroupBlock: Block = {
       label: 'Items (Text + Image)',
       type: 'array',
       minRows: 1,
-      maxRows: 3,
+
       required: true,
       fields: [
         {

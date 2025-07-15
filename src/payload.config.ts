@@ -1,7 +1,7 @@
 // storage-adapter-import-placeholder
 import { postgresAdapter } from '@payloadcms/db-postgres'
 
-import sharp from 'sharp' // sharp-import
+// sharp-import
 import path from 'path'
 import { buildConfig, PayloadRequest } from 'payload'
 import { fileURLToPath } from 'url'
@@ -21,12 +21,12 @@ import { Formations } from './collections/Formations'
 import { Themes } from './collections/Themes'
 import { rentalItems } from './collections/RentalItems'
 import { Rentalcategories } from './collections/RentalCategories'
+import sharp from 'sharp'
 
 //S3 STORAGE
 import { s3Storage } from '@payloadcms/storage-s3'
 import { NodeHttpHandler } from '@smithy/node-http-handler'
 import http from 'http'
-
 const agent = new http.Agent({
   keepAlive: true,
   maxSockets: 500,
@@ -49,7 +49,12 @@ export default buildConfig({
       // // The `BeforeDashboard` component renders the 'welcome' block that you see after logging into your admin panel.
       // // Feel free to delete this at any time. Simply remove the line below.
       // beforeDashboard: ['@/components/BeforeDashboard'],
+      graphics: {
+        Icon: '/graphics/Icon/index.tsx#Icon',
+        Logo: '/graphics/Logo/index.tsx#Logo',
+      },
     },
+
     importMap: {
       baseDir: path.resolve(dirname),
     },
@@ -122,10 +127,11 @@ export default buildConfig({
     }),
   ],
   secret: process.env.PAYLOAD_SECRET,
-  sharp,
+  serverURL: process.env.SERVER_URL || 'http://localhost:3000',
   typescript: {
     outputFile: path.resolve(dirname, 'payload-types.ts'),
   },
+  sharp,
   jobs: {
     access: {
       run: ({ req }: { req: PayloadRequest }): boolean => {

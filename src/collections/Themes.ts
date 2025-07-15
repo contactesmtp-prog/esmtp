@@ -10,6 +10,15 @@ export const Themes: CollectionConfig = {
     read: authenticatedOrPublished,
     update: authenticated,
   },
+  versions: {
+    drafts: {
+      autosave: {
+        interval: 100,
+      },
+      schedulePublish: true,
+    },
+    maxPerDoc: 50,
+  },
   admin: {
     useAsTitle: 'title',
   },

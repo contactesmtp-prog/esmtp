@@ -71,72 +71,127 @@
 # CMD HOSTNAME="0.0.0.0" node server.js
 
 
-# ────────────────────────────────────────────────────────────────────
-# 1. Base image – Node 20‑alpine is stable and slim
-# ────────────────────────────────────────────────────────────────────
-FROM node:20-alpine AS base
 
-# Install tini for better signal handling in containers
-RUN apk add --no-cache tini
+ # ------------ 2222222222
 
-# Install pnpm globally
-RUN npm install -g pnpm
-# Install PostgreSQL client so pg_isready works inside the image
-RUN apk add --no-cache postgresql-client
+# # ────────────────────────────────────────────────────────────────────
+# # 1. Base image – Node 20‑alpine is stable and slim
+# # ────────────────────────────────────────────────────────────────────
+# FROM node:20-alpine AS base
 
-# Create non‑root user for security
-RUN addgroup -S appgroup && adduser -S appuser -G appgroup
+# # Install tini for better signal handling in containers
+# RUN apk add --no-cache tini
 
+# # Install pnpm globally
+# RUN npm install -g pnpm
+# # Install PostgreSQL client so pg_isready works inside the image
+# RUN apk add --no-cache postgresql-client
+
+# # Create non‑root user for security
+# RUN addgroup -S appgroup && adduser -S appuser -G appgroup
+
+# WORKDIR /app
+
+# # ────────────────────────────────────────────────────────────────────
+# # 2. Install global tools
+# #    • pnpm (no Corepack) – avoids the signature error you hit
+# # ────────────────────────────────────────────────────────────────────
+# RUN npm install -g pnpm
+
+# # ────────────────────────────────────────────────────────────────────
+# # 3. Copy lockfile + package.json first → install deps (cache layer)
+# # ────────────────────────────────────────────────────────────────────
+# COPY package.json pnpm-lock.yaml ./
+
+# RUN pnpm install --frozen-lockfile --prod=false
+
+# # ────────────────────────────────────────────────────────────────────
+# # 4. Copy the rest of the source & build
+# # ────────────────────────────────────────────────────────────────────
+# COPY . .
+
+# # Accept build‑time secrets (so they’re **not** baked into final image)
+# ARG PAYLOAD_SECRET
+# ARG DATABASE_URI
+# ENV PAYLOAD_SECRET=${PAYLOAD_SECRET}
+# ENV DATABASE_URI=${DATABASE_URI}
+
+# # Build Next.js & Payload
+# #RUN pnpm build
+
+# # ────────────────────────────────────────────────────────────────────
+# # 5. Prune devDependencies to shrink image
+# # ────────────────────────────────────────────────────────────────────
+# RUN pnpm prune --prod
+
+# # ────────────────────────────────────────────────────────────────────
+# # 6. Final runtime stage – copy only what we need
+# # ────────────────────────────────────────────────────────────────────
+# FROM node:20-alpine
+
+# RUN apk add --no-cache tini \
+#  && addgroup -S appgroup && adduser -S appuser -G appgroup
+
+# WORKDIR /app
+
+# COPY --from=base /app ./
+
+# USER appuser
+
+# ENV NODE_ENV=production
+# EXPOSE 3000
+
+# ENTRYPOINT ["/sbin/tini", "--"]
+# CMD ["pnpm", "start"]
+# --- Base image
+FROM node:18
+
+
+# Install PostgreSQL client (for pg_isready)
+RUN apt-get update && apt-get install -y postgresql-client
+
+# Set working dir
 WORKDIR /app
 
-# ────────────────────────────────────────────────────────────────────
-# 2. Install global tools
-#    • pnpm (no Corepack) – avoids the signature error you hit
-# ────────────────────────────────────────────────────────────────────
+# Install pnpm
 RUN npm install -g pnpm
 
-# ────────────────────────────────────────────────────────────────────
-# 3. Copy lockfile + package.json first → install deps (cache layer)
-# ────────────────────────────────────────────────────────────────────
-COPY package.json pnpm-lock.yaml ./
 
-RUN pnpm install --frozen-lockfile --prod=false
-
-# ────────────────────────────────────────────────────────────────────
-# 4. Copy the rest of the source & build
-# ────────────────────────────────────────────────────────────────────
-COPY . .
-
-# Accept build‑time secrets (so they’re **not** baked into final image)
+# Accept build-time arguments
 ARG PAYLOAD_SECRET
 ARG DATABASE_URI
-ENV PAYLOAD_SECRET=${PAYLOAD_SECRET}
-ENV DATABASE_URI=${DATABASE_URI}
+# ARG SERVER_URL
 
-# Build Next.js & Payload
-#RUN pnpm build
+# Set them as env for the build process
+ENV PAYLOAD_SECRET=$PAYLOAD_SECRET
+ENV DATABASE_URI=$DATABASE_URI
+# ENV SERVER_URL=$SERVER_URL
 
-# ────────────────────────────────────────────────────────────────────
-# 5. Prune devDependencies to shrink image
-# ────────────────────────────────────────────────────────────────────
-RUN pnpm prune --prod
 
-# ────────────────────────────────────────────────────────────────────
-# 6. Final runtime stage – copy only what we need
-# ────────────────────────────────────────────────────────────────────
-FROM node:20-alpine
+# Copy core files
+COPY ./package.json ./pnpm-lock.yaml ./
+COPY tsconfig.json ./              
+COPY next.config.js ./             
+COPY redirects.js ./
+COPY ./public ./public
+COPY next-sitemap.config.cjs ./   
 
-RUN apk add --no-cache tini \
- && addgroup -S appgroup && adduser -S appuser -G appgroup
+# Copy source
+COPY ./src ./src
+COPY tailwind.config.mjs ./
+COPY postcss.config.js ./
 
-WORKDIR /app
 
-COPY --from=base /app ./
+# Install dependencies
+RUN pnpm install --frozen-lockfile
 
-USER appuser
+# Build Next.js + Payload
+#RUN pnpm build 
 
-ENV NODE_ENV=production
+# Expose port for the app
 EXPOSE 3000
 
-ENTRYPOINT ["/sbin/tini", "--"]
+# Start the app
 CMD ["pnpm", "start"]
+
+

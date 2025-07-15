@@ -139,7 +139,7 @@ export const ThemeOverviewBlock = async ({ header }: { header: string }) => {
         <div className="text-center mb-16">
           <div className="inline-flex items-center gap-2 bg-[#0C2E53]/10 text-[#0C2E53] px-4 py-2 rounded-full text-sm font-medium mb-6">
             <Sparkles className="w-4 h-4" />
-            Nos domaines d`&apos;`expertise
+            Nos domaines d&apos;expertise
           </div>
           <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-[#0C2E53] to-[#D78B22] bg-clip-text text-transparent mb-6">
             {header}
@@ -227,7 +227,8 @@ export const ThemeOverviewBlock = async ({ header }: { header: string }) => {
         <div className="text-center mt-16">
           <div className="inline-flex items-center gap-2 text-gray-600 text-sm">
             <div className="w-2 h-2 bg-[#0C2E53] rounded-full animate-pulse"></div>
-            Besoin d`&apos;`aide pour choisir ? Contactez nos conseillers
+            Besoin d&apos;aide pour choisir ?{' '}
+            <Link href="/contact"> Contactez nos conseillers</Link>
             <div className="w-2 h-2 bg-[#D78B22] rounded-full animate-pulse"></div>
           </div>
         </div>

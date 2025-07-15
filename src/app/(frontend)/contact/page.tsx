@@ -1,185 +1,8 @@
-// 'use client'
-
-// import React, { useState } from 'react'
-// import { Dialog } from '@headlessui/react'
-
-// export default function ContactPage() {
-//   const [openPolicy, setOpenPolicy] = useState(false)
-//   const [loading, setLoading] = useState(false)
-//   const [error, setError] = useState<string | null>(null)
-
-//   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-//     e.preventDefault()
-//     setLoading(true)
-//     setError(null)
-
-//     const form = e.currentTarget
-//     const formData = new FormData(form)
-
-//     const payload = {
-//       nom: formData.get('nom'),
-//       email: formData.get('email'),
-//       entreprise: formData.get('entreprise'),
-//       telephone: formData.get('telephone'),
-//       message: formData.get('message'),
-//     }
-
-//     try {
-//       const res = await fetch('/api/submit-contact', {
-//         method: 'POST',
-//         headers: { 'Content-Type': 'application/json' },
-//         body: JSON.stringify(payload),
-//       })
-
-//       const data = await res.json()
-
-//       if (!res.ok) {
-//         throw new Error(data.error || 'Une erreur est survenue.')
-//       }
-
-//       form.reset()
-//       alert('Demande envoyée avec succès !')
-//     } catch (err: any) {
-//       setError(err.message || 'Erreur lors de l’envoi.')
-//     } finally {
-//       setLoading(false)
-//     }
-//   }
-
-//   return (
-//     <div className="min-h-screen bg-white py-16 px-6 sm:px-12">
-//       <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16">
-//         {/* LEFT: Contact Information */}
-//         <div className="space-y-6">
-//           <h2 className="text-3xl font-bold text-[#0C2E53]">Contactez-nous</h2>
-//           <p className="text-gray-600">Nous sommes là pour répondre à vos questions.</p>
-
-//           <div className="space-y-4 text-sm text-gray-700">
-//             <div>
-//               <span className="font-semibold">Email:</span>{' '}
-//               <a href="mailto:contact@esmtp.dz" className="text-blue-600 underline">
-//                 contact@esmtp.dz
-//               </a>
-//             </div>
-//             <div>
-//               <span className="font-semibold">Téléphone:</span> +213 (0) XX XX XX XX
-//             </div>
-//             <div>
-//               <span className="font-semibold">Fax:</span> +213 (0) XX XX XX YY
-//             </div>
-//             <div>
-//               <span className="font-semibold">Adresse:</span> 123 Rue de l’Exemple, Alger, Algérie
-//             </div>
-//             <div>
-//               <span className="font-semibold">Lien utile:</span>{' '}
-//               <a href="https://example.com" target="_blank" className="text-blue-600 underline">
-//                 www.example.com
-//               </a>
-//             </div>
-//           </div>
-//         </div>
-
-//         {/* RIGHT: Contact Form */}
-//         <div>
-//           <form className="space-y-4" onSubmit={handleSubmit}>
-//             <div>
-//               <label className="block text-sm font-medium mb-1">Nom complet</label>
-//               <input name="nom" type="text" className="w-full border px-4 py-2 rounded" required />
-//             </div>
-
-//             <div>
-//               <label className="block text-sm font-medium mb-1">Email</label>
-//               <input
-//                 name="email"
-//                 type="email"
-//                 className="w-full border px-4 py-2 rounded"
-//                 required
-//               />
-//             </div>
-
-//             <div>
-//               <label className="block text-sm font-medium mb-1">Nom de l’entreprise</label>
-//               <textarea name="entreprise" className="w-full border px-4 py-2 rounded" rows={3} />
-//             </div>
-
-//             <div>
-//               <label className="block text-sm font-medium mb-1">Téléphone</label>
-//               <input name="telephone" type="tel" className="w-full border px-4 py-2 rounded" />
-//             </div>
-
-//             <div>
-//               <label className="block text-sm font-medium mb-1">Message</label>
-//               <textarea name="message" className="w-full border px-4 py-2 rounded" rows={4} />
-//             </div>
-
-//             <div className="flex items-start gap-2">
-//               <input name="consent" type="checkbox" required className="mt-1" />
-//               <label className="text-sm">
-//                 J’accepte que mes données personnelles soient utilisées pour le traitement de ma
-//                 demande. Voir notre{' '}
-//                 <button
-//                   type="button"
-//                   onClick={() => setOpenPolicy(true)}
-//                   className="underline text-[#0C2E53] hover:text-[#133f76]"
-//                 >
-//                   politique de confidentialité
-//                 </button>
-//                 .
-//               </label>
-//             </div>
-
-//             {error && <p className="text-red-600">{error}</p>}
-
-//             <button
-//               type="submit"
-//               disabled={loading}
-//               className="bg-[#D78B22] text-white px-6 py-2 rounded hover:bg-opacity-90 transition"
-//             >
-//               {loading ? 'Envoi en cours…' : 'Envoyer la demande'}
-//             </button>
-//           </form>
-//         </div>
-//       </div>
-
-//       {/* Privacy Policy Dialog */}
-//       <Dialog open={openPolicy} onClose={() => setOpenPolicy(false)} className="relative z-50">
-//         <div className="fixed inset-0 bg-black/40 backdrop-blur-sm" aria-hidden="true" />
-//         <div className="fixed inset-0 flex items-center justify-center p-4">
-//           <Dialog.Panel className="max-w-2xl w-full bg-white rounded-lg shadow-xl p-6 space-y-4">
-//             <Dialog.Title className="text-xl font-semibold">
-//               Politique de confidentialité
-//             </Dialog.Title>
-//             <div className="prose max-h-[60vh] overflow-y-auto">
-//               <p>
-//                 Nous utilisons vos informations uniquement pour répondre à votre demande. Vos
-//                 données ne seront jamais partagées sans votre consentement. Vous pouvez à tout
-//                 moment demander la suppression de vos données via notre support.
-//               </p>
-//               <p>
-//                 Contactez-nous à{' '}
-//                 <a href="mailto:contact@esmtp.dz" className="text-blue-600 underline">
-//                   contact@esmtp.dz
-//                 </a>{' '}
-//                 pour toute question relative à vos droits.
-//               </p>
-//             </div>
-//             <button
-//               onClick={() => setOpenPolicy(false)}
-//               className="mt-4 px-5 py-2 rounded-md bg-[#0C2E53] text-white hover:bg-[#133f76] transition"
-//             >
-//               Fermer
-//             </button>
-//           </Dialog.Panel>
-//         </div>
-//       </Dialog>
-//     </div>
-//   )
-// }
-
 'use client'
 
 import React, { useState } from 'react'
 import { Dialog } from '@headlessui/react'
+
 import {
   Mail,
   Phone,
@@ -299,7 +122,7 @@ export default function ContactPage() {
               Parlons de votre projet
             </h1>
             <p className="text-gray-600 text-xl max-w-3xl mx-auto">
-              Notre équipe d`&apos;`experts est là pour vous accompagner dans vos projets de
+              Notre équipe d&apos;experts est là pour vous accompagner dans vos projets de
               formation. Contactez-nous pour discuter de vos besoins spécifiques.
             </p>
           </div>
@@ -355,7 +178,7 @@ export default function ContactPage() {
                     <span className="font-semibold text-[#0C2E53]">Réponse garantie sous 24h</span>
                   </div>
                   <p className="text-gray-600 text-sm">
-                    Notre équipe s`&apos;`engage à vous répondre dans les plus brefs délais pour
+                    Notre équipe s&apos;engage à vous répondre dans les plus brefs délais pour
                     étudier votre demande.
                   </p>
                 </div>
@@ -458,8 +281,8 @@ export default function ContactPage() {
                     className="mt-1 w-5 h-5 text-[#0C2E53] border-2 border-gray-300 rounded focus:ring-[#0C2E53] focus:ring-2"
                   />
                   <label className="text-sm text-gray-700 leading-relaxed">
-                    J`&apos;`accepte que mes données personnelles soient utilisées pour le
-                    traitement de ma demande.
+                    J&apos;accepte que mes données personnelles soient utilisées pour le traitement
+                    de ma demande.
                     <button
                       type="button"
                       onClick={() => setOpenPolicy(true)}
@@ -523,9 +346,9 @@ export default function ContactPage() {
                 partagées avec des tiers sans votre consentement explicite.
               </p>
               <p className="leading-relaxed">
-                Vous disposez d`&apos;`un droit d`&apos;`accès, de rectification et de suppression
-                de vos données personnelles. Vous pouvez à tout moment demander la suppression de
-                vos données via notre support client.
+                Vous disposez d&apos;un droit d&apos;accès, de rectification et de suppression de
+                vos données personnelles. Vous pouvez à tout moment demander la suppression de vos
+                données via notre support client.
               </p>
               <p className="leading-relaxed">
                 Pour toute question relative à vos droits ou à notre politique de confidentialité,
@@ -543,7 +366,7 @@ export default function ContactPage() {
               onClick={() => setOpenPolicy(false)}
               className="w-full bg-gradient-to-r from-[#0C2E53] to-[#D78B22] text-white px-6 py-3 rounded-xl font-semibold hover:shadow-lg transition-all duration-300"
             >
-              J`&apos;`ai compris
+              J&apos;ai compris
             </button>
           </Dialog.Panel>
         </div>

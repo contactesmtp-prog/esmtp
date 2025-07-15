@@ -9,6 +9,15 @@ export const Formations: CollectionConfig = {
     read: authenticatedOrPublished,
     update: authenticated,
   },
+  versions: {
+    drafts: {
+      autosave: {
+        interval: 100,
+      },
+      schedulePublish: true,
+    },
+    maxPerDoc: 50,
+  },
   admin: {
     useAsTitle: 'nom',
   },

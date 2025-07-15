@@ -18,6 +18,8 @@ import { generatePreviewPath } from '../../utilities/generatePreviewPath'
 import { populateAuthors } from './hooks/populateAuthors'
 import { revalidateDelete, revalidateEvent } from './hooks/revalidateEvent'
 import { authenticatedOrPublished } from '@/access/authenticatedOrPublished'
+import { styledImage } from '@/blocks/ImageContentBlock.tsx/config'
+
 import {
   MetaDescriptionField,
   MetaImageField,
@@ -102,7 +104,7 @@ export const Events: CollectionConfig<'events'> = {
                   return [
                     ...rootFeatures,
                     HeadingFeature({ enabledHeadingSizes: ['h1', 'h2', 'h3', 'h4'] }),
-                    BlocksFeature({ blocks: [Banner, Code, MediaBlock] }),
+                    BlocksFeature({ blocks: [Banner, Code, MediaBlock, styledImage] }),
                     FixedToolbarFeature(),
                     InlineToolbarFeature(),
                     HorizontalRuleFeature(),

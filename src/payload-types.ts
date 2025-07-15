@@ -310,6 +310,7 @@ export interface Media {
     };
     [k: string]: unknown;
   } | null;
+  prefix?: string | null;
   updatedAt: string;
   createdAt: string;
   url?: string | null;
@@ -1000,6 +1001,7 @@ export interface Formation {
   theme: number | Theme;
   updatedAt: string;
   createdAt: string;
+  _status?: ('draft' | 'published') | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1011,6 +1013,7 @@ export interface Theme {
   description?: string | null;
   updatedAt: string;
   createdAt: string;
+  _status?: ('draft' | 'published') | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1094,6 +1097,7 @@ export interface Rentalitem {
     | null;
   updatedAt: string;
   createdAt: string;
+  _status?: ('draft' | 'published') | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1105,6 +1109,7 @@ export interface Rentalcategory {
   image?: (number | null) | Media;
   updatedAt: string;
   createdAt: string;
+  _status?: ('draft' | 'published') | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1159,10 +1164,15 @@ export interface Search {
   id: number;
   title?: string | null;
   priority?: number | null;
-  doc: {
-    relationTo: 'posts';
-    value: number | Post;
-  };
+  doc:
+    | {
+        relationTo: 'posts';
+        value: number | Post;
+      }
+    | {
+        relationTo: 'pages';
+        value: number | Page;
+      };
   slug?: string | null;
   meta?: {
     title?: string | null;
@@ -1779,6 +1789,7 @@ export interface PostsSelect<T extends boolean = true> {
 export interface MediaSelect<T extends boolean = true> {
   alt?: T;
   caption?: T;
+  prefix?: T;
   updatedAt?: T;
   createdAt?: T;
   url?: T;
@@ -1952,6 +1963,7 @@ export interface FormationsSelect<T extends boolean = true> {
   theme?: T;
   updatedAt?: T;
   createdAt?: T;
+  _status?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1962,6 +1974,7 @@ export interface ThemesSelect<T extends boolean = true> {
   description?: T;
   updatedAt?: T;
   createdAt?: T;
+  _status?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1980,6 +1993,7 @@ export interface RentalitemsSelect<T extends boolean = true> {
       };
   updatedAt?: T;
   createdAt?: T;
+  _status?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1990,6 +2004,7 @@ export interface RentalcategoriesSelect<T extends boolean = true> {
   image?: T;
   updatedAt?: T;
   createdAt?: T;
+  _status?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -2459,6 +2474,22 @@ export interface TaskSchedulePublish {
       | ({
           relationTo: 'events';
           value: number | Event;
+        } | null)
+      | ({
+          relationTo: 'formations';
+          value: number | Formation;
+        } | null)
+      | ({
+          relationTo: 'themes';
+          value: number | Theme;
+        } | null)
+      | ({
+          relationTo: 'rentalitems';
+          value: number | Rentalitem;
+        } | null)
+      | ({
+          relationTo: 'rentalcategories';
+          value: number | Rentalcategory;
         } | null);
     global?: string | null;
     user?: (number | null) | User;
