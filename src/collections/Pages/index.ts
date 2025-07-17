@@ -25,6 +25,7 @@ import { TextImageGroupBlock } from '@/blocks/WhyESMTPblock/config'
 import { UpcomingFormations } from '@/blocks/UpcomingFormations/config'
 import { FeaturedFormationsBlock } from '@/blocks/SelectedFormationBlock/config'
 import { styledImage } from '@/blocks/ImageContentBlock.tsx/config'
+import { ESMTPVideosBlock } from '@/blocks/ESMTPVideos/config'
 
 import {
   MetaDescriptionField,
@@ -107,6 +108,7 @@ export const Pages: CollectionConfig<'pages'> = {
                 UpcomingFormations,
                 FeaturedFormationsBlock,
                 styledImage,
+                ESMTPVideosBlock,
               ],
               required: true,
               admin: {

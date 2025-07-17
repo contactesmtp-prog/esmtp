@@ -36,10 +36,10 @@ export const StyledImageBlock: React.FC<StyledImageInter> = ({
     maxHeight: alignment === 'full' && !height ? '300px' : undefined,
     objectFit: 'cover',
   }
-  console.log('🖼️ media:', media)
+  //   console.log('🖼️ media:', media)
 
-  console.log('🖼️ Final Image URL:', media.url)
-  console.log('Image dimensions:', media.width, media.height)
+  //   console.log('🖼️ Final Image URL:', media.url)
+  //   console.log('Image dimensions:', media.width, media.height)
 
   return (
     <div className={`w-full my-8 ${alignment !== 'full' ? `flex ${alignmentClass}` : ''}`}>

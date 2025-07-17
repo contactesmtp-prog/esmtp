@@ -217,7 +217,7 @@ export const LastEventBlock = async ({ header }: { header: string }) => {
                         href={`/events/${post.slug}`}
                         className="inline-flex items-center mt-4 text-[#D78B22] hover:text-[#f4a335] font-semibold transition-colors duration-300 group/link"
                       >
-                        Read More
+                        En savoir plus
                         <svg
                           className="w-4 h-4 ml-2 transform group-hover/link:translate-x-1 transition-transform duration-300"
                           fill="none"

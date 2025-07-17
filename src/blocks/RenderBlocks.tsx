@@ -20,7 +20,7 @@ import { TextImageGroup } from './WhyESMTPblock/component'
 import { LastFormationBlock } from './UpcomingFormations/components'
 import { FeaturedFormationsBlock } from './SelectedFormationBlock/components'
 import { StyledImageBlock } from './ImageContentBlock.tsx/components'
-
+import { ESMTPVideosBlock } from './ESMTPVideos/components'
 const blockComponents = {
   archive: ArchiveBlock,
   content: ContentBlock,
@@ -39,6 +39,7 @@ const blockComponents = {
   upcomingFormations: LastFormationBlock,
   featuredFormations: FeaturedFormationsBlock,
   styledImage: StyledImageBlock,
+  esmtpvideosBlock: ESMTPVideosBlock,
 }
 
 export const RenderBlocks: React.FC<{

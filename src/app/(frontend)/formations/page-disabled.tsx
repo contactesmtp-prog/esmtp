@@ -41,8 +41,10 @@ export default async function FormationsPage({ searchParams }: Props) {
   return (
     <div className="max-w-6xl mx-auto py-12 px-4">
       <h1 className="text-2xl font-semibold mb-6">Liste des Formations</h1>
-      <div>
-        <BackButton />
+      <div className="mt-6 mb-10 mt-20 px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-start">
+          <BackButton />
+        </div>
       </div>
       {formations.length === 0 ? (
         <p>Aucune formation trouvée pour ce thème.</p>

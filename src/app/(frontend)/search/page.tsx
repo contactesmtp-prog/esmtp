@@ -59,6 +59,7 @@ export default async function Page({ searchParams: searchParamsPromise }: Args) 
         }
       : {}),
   })
+  console.log('Here Our posts', posts)
 
   return (
     <div className="pt-24 pb-24">

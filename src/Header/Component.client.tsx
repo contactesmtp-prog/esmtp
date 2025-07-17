@@ -7,6 +7,7 @@ import { Logo } from '@/components/Logo/Logo'
 import { HeaderNav } from './Nav'
 import { useHeaderTheme } from '@/providers/HeaderTheme'
 import { Menu, X, Search } from 'lucide-react'
+import { SearchAutocomplete } from '@/app/(frontend)/search/SearchAutocomplete'
 
 interface HeaderClientProps {
   data: Header
@@ -93,6 +94,9 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
               <HeaderNav data={data} />
             </div>
 
+            <div className="hidden lg:block">
+              <SearchAutocomplete />{' '}
+            </div>
             {/* Desktop Right Section */}
             <div className="hidden lg:flex items-center space-x-4">{/* CTA Button */}</div>
 
@@ -167,16 +171,16 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
 
             {/* Mobile Menu Footer */}
             <div className="p-6 border-t border-white/10 space-y-4">
-              <Link
+              {/* <Link
                 href="/search"
                 className="flex items-center w-full px-4 py-3 text-white/90 hover:text-white hover:bg-white/10 rounded-lg transition-all duration-200"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 <Search className="w-5 h-5 mr-3" />
                 Search
-              </Link>
+              </Link> */}
 
-              <Link
+              {/* <Link
                 href="/contact"
                 className="flex items-center justify-center w-full px-6 py-3 bg-gradient-to-r from-[#D78B22] to-[#f4a335] text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
                 onClick={() => setIsMobileMenuOpen(false)}
@@ -190,7 +194,7 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
                     d="M13 7l5 5m0 0l-5 5m5-5H6"
                   />
                 </svg>
-              </Link>
+              </Link> */}
             </div>
           </div>
         </div>

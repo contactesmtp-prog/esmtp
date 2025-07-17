@@ -315,7 +315,7 @@ export const HeaderNav: React.FC<HeaderNavProps> = ({ data, isMobile = false }) 
                               className="flex items-center px-4 py-2 text-white/70 hover:text-white hover:bg-white/5 rounded-lg transition-all duration-200 text-sm relative group/item"
                             >
                               <div className="absolute left-0 top-0 w-1 h-full bg-[#D78B22] transform scale-y-0 group-hover/item:scale-y-100 transition-transform duration-200 origin-center rounded-r"></div>
-                              <span className="relative z-10 ml-2">{child.link.label}</span>
+                              {/* <span className="relative z-10 ml-2">{child.link.label}</span> */}
                             </CMSLink>
                           )}
                         </div>
@@ -334,7 +334,7 @@ export const HeaderNav: React.FC<HeaderNavProps> = ({ data, isMobile = false }) 
                 className="flex items-center px-4 py-3 text-white/90 hover:text-white hover:bg-white/10 rounded-lg transition-all duration-200 font-medium relative group"
               >
                 <div className="absolute left-0 top-0 w-1 h-full bg-[#D78B22] transform scale-y-0 group-hover:scale-y-100 transition-transform duration-200 origin-center rounded-r"></div>
-                <span className="relative z-10 ml-2">{item.link?.label}</span>
+                {/* <span className="relative z-10 ml-2">{item.link?.label}</span> */}
               </CMSLink>
             )
           })}

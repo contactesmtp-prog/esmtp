@@ -365,9 +365,16 @@ export const FormationsClient: React.FC<Props> = ({ formations, themeInfo }) => 
         {/* Enhanced Header Section */}
         <motion.div className="mb-8" variants={itemVariants}>
           <div className="text-center mb-8">
-            <div className="mb-6 mt-10">
+            {/* <div className="mb-6 mt-10">
               <div className="flex justify-start">
                 <BackButton />
+              </div>
+            </div> */}
+            <div className="mt-6 mb-10 mt-20 px-4 sm:px-6 lg:px-8">
+              <div className="mt-6 mb-10 mt-20 px-4 sm:px-6 lg:px-8">
+                <div className="flex justify-start">
+                  <BackButton />
+                </div>
               </div>
             </div>
             <motion.div
@@ -546,7 +553,8 @@ export const FormationsClient: React.FC<Props> = ({ formations, themeInfo }) => 
                 {filteredAndSortedFormations.map((formation, index) => (
                   <motion.div
                     key={formation.id}
-                    className="grid grid-cols-12 gap-4 p-6 hover:bg-gradient-to-r hover:from-[#0C2E53]/5 hover:to-[#D78B22]/5 transition-all duration-300 group cursor-pointer"
+                    // className="grid grid-cols-12 gap-4 p-6 hover:bg-gradient-to-r hover:from-[#0C2E53]/5 hover:to-[#D78B22]/5 transition-all duration-300 group cursor-pointer"
+                    className="relative grid grid-cols-1 md:grid-cols-12 gap-4 p-4 sm:p-6 hover:bg-gradient-to-r hover:from-[#0C2E53]/5 hover:to-[#D78B22]/5 transition-all duration-300 group cursor-pointer"
                     variants={rowVariants}
                     initial="hidden"
                     animate="visible"
@@ -664,12 +672,12 @@ export const FormationsClient: React.FC<Props> = ({ formations, themeInfo }) => 
 
                     {/* Actions */}
                     <div className="flex gap-2">
-                      <Link
+                      {/* <Link
                         href={`/formations/${formation.id}`}
                         className="flex-1 text-center py-2 text-[#0C2E53] border border-[#0C2E53]/20 rounded-lg hover:bg-[#0C2E53]/5 transition-all duration-300 text-sm font-medium"
                       >
                         Voir
-                      </Link>
+                      </Link> */}
                       <Link
                         href={`/devis?formation=${formation.id}`}
                         className="flex-1 text-center py-2 bg-gradient-to-r from-[#0C2E53] to-[#D78B22] text-white rounded-lg hover:shadow-lg transition-all duration-300 text-sm font-medium"
@@ -685,7 +693,7 @@ export const FormationsClient: React.FC<Props> = ({ formations, themeInfo }) => 
         </AnimatePresence>
 
         {/* Enhanced Stats Section */}
-        {filteredAndSortedFormations.length > 0 && (
+        {/* {filteredAndSortedFormations.length > 0 && (
           <motion.div className="mt-12 text-center" variants={itemVariants}>
             <div className="inline-flex items-center gap-6 bg-white/80 backdrop-blur-sm rounded-2xl px-8 py-6 shadow-xl border border-white/50">
               <div className="flex items-center gap-3">
@@ -705,6 +713,38 @@ export const FormationsClient: React.FC<Props> = ({ formations, themeInfo }) => 
               </div>
               <div className="w-px h-8 bg-gray-300"></div>
               <div className="flex items-center gap-3">
+                <Star className="w-4 h-4 text-[#0C2E53]" />
+                <span className="text-sm font-semibold text-gray-700">Qualité garantie</span>
+              </div>
+            </div>
+          </motion.div>
+        )} */}
+        {filteredAndSortedFormations.length > 0 && (
+          <motion.div className="mt-12 text-center" variants={itemVariants}>
+            <div className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-6 bg-white/80 backdrop-blur-sm rounded-2xl px-6 py-4 shadow-xl border border-white/50 text-center">
+              <div className="flex items-center gap-2">
+                <div className="w-4 h-4 bg-gradient-to-r from-[#0C2E53] to-[#D78B22] rounded-full"></div>
+                <span className="text-sm font-semibold text-gray-700">
+                  {filteredAndSortedFormations.length} formation
+                  {filteredAndSortedFormations.length > 1 ? 's' : ''} disponible
+                  {filteredAndSortedFormations.length > 1 ? 's' : ''}
+                </span>
+              </div>
+
+              {/* Divider */}
+              <div className="hidden md:block w-px h-6 bg-gray-300"></div>
+
+              <div className="flex items-center gap-2">
+                <Users className="w-4 h-4 text-[#D78B22]" />
+                <span className="text-sm font-semibold text-gray-700">
+                  Formation professionnelle certifiante
+                </span>
+              </div>
+
+              {/* Divider */}
+              <div className="hidden md:block w-px h-6 bg-gray-300"></div>
+
+              <div className="flex items-center gap-2">
                 <Star className="w-4 h-4 text-[#0C2E53]" />
                 <span className="text-sm font-semibold text-gray-700">Qualité garantie</span>
               </div>

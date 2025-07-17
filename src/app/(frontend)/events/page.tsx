@@ -29,9 +29,9 @@ export default async function Page() {
       excerpt: true,
     },
   })
-  {
-    console.log('event posts', posts.docs)
-  }
+  // {
+  //   console.log('event posts', posts.docs)
+  // }
   return (
     <div className="pt-24 pb-24">
       <PageClient />

@@ -224,6 +224,7 @@ export interface Page {
     | UpcomingFormationsBlock
     | FeaturedFormations
     | StyledImageInter
+    | Esmtpvideoblockinter
   )[];
   meta?: {
     title?: string | null;
@@ -1030,6 +1031,21 @@ export interface StyledImageInter {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "esmtpvideoblockinter".
+ */
+export interface Esmtpvideoblockinter {
+  title: string;
+  videos: {
+    title: string;
+    url: string;
+    id?: string | null;
+  }[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'esmtpvideosBlock';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "events".
  */
 export interface Event {
@@ -1444,6 +1460,7 @@ export interface PagesSelect<T extends boolean = true> {
         upcomingFormations?: T | UpcomingFormationsBlockSelect<T>;
         featuredFormations?: T | FeaturedFormationsSelect<T>;
         styledImage?: T | StyledImageInterSelect<T>;
+        esmtpvideosBlock?: T | EsmtpvideoblockinterSelect<T>;
       };
   meta?:
     | T
@@ -1747,6 +1764,22 @@ export interface StyledImageInterSelect<T extends boolean = true> {
   alignment?: T;
   width?: T;
   height?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "esmtpvideoblockinter_select".
+ */
+export interface EsmtpvideoblockinterSelect<T extends boolean = true> {
+  title?: T;
+  videos?:
+    | T
+    | {
+        title?: T;
+        url?: T;
+        id?: T;
+      };
   id?: T;
   blockName?: T;
 }

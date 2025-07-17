@@ -14,7 +14,12 @@ const LocationGrid = ({ rentalItems }: Props) => {
   return (
     <section className="bg-gradient-to-b from-[#f8f9fa] to-white py-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <BackButton />
+        <div className="mt-6 mb-10 mt-20 px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-start">
+            <BackButton />
+          </div>
+        </div>
+
         <h1 className="text-5xl font-bold text-center text-slate-900 mb-16 font-playfair-display">
           Articles Disponibles à la Location
         </h1>

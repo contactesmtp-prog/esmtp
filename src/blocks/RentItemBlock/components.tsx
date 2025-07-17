@@ -106,7 +106,8 @@ import configPromise from '@payload-config'
 import { draftMode } from 'next/headers'
 import Link from 'next/link'
 import { Package, ArrowRight, Sparkles, Star, Award } from 'lucide-react'
-
+//import { Media } from '@/components/Media'
+import Image from 'next/image'
 type CategoryType = RequiredDataFromCollectionSlug<'rentalcategories'>
 type ItemType = Omit<RequiredDataFromCollectionSlug<'rentalitems'>, 'category'> & {
   category: string | CategoryType
@@ -218,9 +219,11 @@ export const RentalOverviewBlock = async ({ header }: { header: string }) => {
 
                 {/* Image Container */}
                 <div className="relative h-64 w-full overflow-hidden">
-                  <div
-                    className="absolute inset-0 bg-cover bg-center group-hover:scale-110 transition-transform duration-500"
-                    style={{ backgroundImage: `url(${imageUrl})` }}
+                  <Image
+                    src={imageUrl}
+                    alt=""
+                    className="absolute inset-0 w-full h-full object-cover object-center ..."
+                    fill
                   />
 
                   {/* Gradient overlay */}
@@ -269,7 +272,7 @@ export const RentalOverviewBlock = async ({ header }: { header: string }) => {
                     <div className="text-sm">
                       <div className="font-medium text-gray-800">Espaces disponibles</div>
                       <div className="text-gray-600">
-                        {itemCount} espace{itemCount !== 1 ? 's' : ''} disponibles
+                        {itemCount} espace{itemCount !== 1 ? 's' : ''} disponible
                       </div>
                     </div>
                   </div>
@@ -322,7 +325,8 @@ export const RentalOverviewBlock = async ({ header }: { header: string }) => {
 
         {/* Bottom stats section */}
         <div className="text-center mt-16">
-          <div className="inline-flex items-center gap-6 bg-white/80 backdrop-blur-sm rounded-2xl px-8 py-4 shadow-lg border border-gray-100">
+          <div className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-6 bg-white/80 backdrop-blur-sm rounded-2xl px-6 py-4 shadow-lg border border-gray-100 text-center">
+            {/* <div className="inline-flex items-center gap-6 bg-white/80 backdrop-blur-sm rounded-2xl px-8 py-4 shadow-lg border border-gray-100"> */}
             <div className="flex items-center gap-2">
               <div className="w-3 h-3 bg-[#0C2E53] rounded-full"></div>
               <span className="text-sm font-medium text-gray-700">
