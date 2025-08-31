@@ -52,7 +52,7 @@ export const Events: CollectionConfig<'events'> = {
     },
   },
   admin: {
-    defaultColumns: ['title', 'slug', 'updatedAt'],
+    defaultColumns: ['titleev', 'slug', 'updatedAt'],
     livePreview: {
       url: ({ data, req }) => {
         const path = generatePreviewPath({
@@ -77,7 +77,17 @@ export const Events: CollectionConfig<'events'> = {
       name: 'title',
       type: 'text',
       required: true,
+
+      label: 'Generate the slug EN',
     },
+    {
+      name: 'titleev',
+      type: 'text',
+      required: true,
+      localized: true,
+      label: 'the evenet title',
+    },
+
     {
       name: 'excerpt',
       type: 'textarea',
@@ -85,6 +95,7 @@ export const Events: CollectionConfig<'events'> = {
         description: 'A short summary of the post, used for SEO and previews.',
       },
       required: true,
+      localized: true,
     },
     {
       type: 'tabs',
@@ -113,6 +124,7 @@ export const Events: CollectionConfig<'events'> = {
               }),
               label: false,
               required: true,
+              localized: true,
             },
           ],
           label: 'Content',

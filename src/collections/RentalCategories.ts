@@ -27,6 +27,7 @@ export const Rentalcategories: CollectionConfig = {
       label: 'Nom de la catégorie',
       type: 'text',
       required: true,
+      localized: true,
     },
     {
       name: 'image',

@@ -27,6 +27,7 @@ export const Formations: CollectionConfig = {
       label: 'Nom de formation',
       type: 'text',
       required: true,
+      localized: true,
     },
     {
       name: 'startDate',
@@ -55,6 +56,7 @@ export const Formations: CollectionConfig = {
       label: 'Durée',
       type: 'text',
       required: true,
+      localized: true,
     },
     {
       name: 'theme',
@@ -62,6 +64,12 @@ export const Formations: CollectionConfig = {
       type: 'relationship',
       relationTo: 'themes',
       required: true,
+    },
+    {
+      name: 'forpdf',
+      label: 'pdf ',
+      type: 'upload',
+      relationTo: 'media',
     },
   ],
 }

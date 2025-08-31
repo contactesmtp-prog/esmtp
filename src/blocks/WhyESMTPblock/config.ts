@@ -21,6 +21,7 @@ export const TextImageGroupBlock: Block = {
           label: 'Text',
           type: 'textarea',
           required: true,
+          localized: true,
         },
         {
           name: 'image',

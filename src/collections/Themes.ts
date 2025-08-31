@@ -28,10 +28,12 @@ export const Themes: CollectionConfig = {
       label: 'Nom du thème',
       type: 'text',
       required: true,
+      localized: true,
     },
     {
       name: 'description',
       type: 'textarea',
+      localized: true,
     },
   ],
 }

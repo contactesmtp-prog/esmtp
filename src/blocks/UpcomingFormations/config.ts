@@ -13,6 +13,7 @@ export const UpcomingFormations: Block = {
       label: 'Section Title',
       type: 'text',
       required: true,
+      localized: true,
     },
     {
       name: 'limit',

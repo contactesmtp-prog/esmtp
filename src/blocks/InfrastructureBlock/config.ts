@@ -13,11 +13,13 @@ export const GroupedItems: Block = {
       label: 'Section Title',
       type: 'text',
       required: true,
+      localized: true,
     },
     {
       name: 'description',
       label: 'Section Description',
       type: 'textarea',
+      localized: true,
     },
     {
       name: 'itemGroups',
@@ -30,6 +32,7 @@ export const GroupedItems: Block = {
           label: 'Group Header',
           type: 'text',
           required: true,
+          localized: true,
         },
         {
           name: 'items',
@@ -42,6 +45,7 @@ export const GroupedItems: Block = {
               label: 'Item Text',
               type: 'text',
               required: true,
+              localized: true,
             },
           ],
         },
@@ -58,6 +62,7 @@ export const GroupedItems: Block = {
           label: 'Image Group Title',
           type: 'text',
           required: true,
+          localized: true,
         },
         {
           name: 'images',

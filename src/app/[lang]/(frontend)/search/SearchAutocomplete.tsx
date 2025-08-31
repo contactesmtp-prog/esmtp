@@ -70,6 +70,7 @@ import React, { useEffect, useState, useRef } from 'react'
 import Link from 'next/link'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Search, X, Clock, ArrowRight, Loader2 } from 'lucide-react'
+import { useParams } from 'next/navigation' // ⬅️ Import this to get [lang]
 
 type SearchResult = {
   title: string
@@ -77,6 +78,8 @@ type SearchResult = {
 }
 
 export function SearchAutocomplete() {
+  const { lang } = useParams<{ lang: string }>()
+
   const [query, setQuery] = useState('')
   const [results, setResults] = useState<SearchResult[]>([])
   const [loading, setLoading] = useState(false)
@@ -234,7 +237,7 @@ export function SearchAutocomplete() {
               setIsFocused(true)
               setIsOpen(true)
             }}
-            placeholder="Rechercher..."
+            placeholder={lang === 'ar' ? 'بحث ...' : lang === 'en' ? 'Research...' : 'Recherche...'}
             className="w-full pl-12 pr-12 py-3 bg-transparent text-gray-800 placeholder-gray-500 focus:outline-none text-sm font-medium"
           />
 

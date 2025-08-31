@@ -77,6 +77,7 @@ export interface Config {
     themes: Theme;
     rentalitems: Rentalitem;
     rentalcategories: Rentalcategory;
+    contactuscoll: Contactuscoll;
     redirects: Redirect;
     forms: Form;
     'form-submissions': FormSubmission;
@@ -98,6 +99,7 @@ export interface Config {
     themes: ThemesSelect<false> | ThemesSelect<true>;
     rentalitems: RentalitemsSelect<false> | RentalitemsSelect<true>;
     rentalcategories: RentalcategoriesSelect<false> | RentalcategoriesSelect<true>;
+    contactuscoll: ContactuscollSelect<false> | ContactuscollSelect<true>;
     redirects: RedirectsSelect<false> | RedirectsSelect<true>;
     forms: FormsSelect<false> | FormsSelect<true>;
     'form-submissions': FormSubmissionsSelect<false> | FormSubmissionsSelect<true>;
@@ -118,7 +120,7 @@ export interface Config {
     header: HeaderSelect<false> | HeaderSelect<true>;
     footer: FooterSelect<false> | FooterSelect<true>;
   };
-  locale: null;
+  locale: 'en' | 'fr' | 'ar';
   user: User & {
     collection: 'users';
   };
@@ -777,7 +779,7 @@ export interface Form {
 export interface DirectorBlockInter {
   heading: string;
   /**
-   * Le mot à mettre en surbrillance en vert.
+   * Le mot à mettre en surbrillance.
    */
   highlight?: string | null;
   description: string;
@@ -1000,6 +1002,7 @@ export interface Formation {
   endDate: string;
   duree: string;
   theme: number | Theme;
+  forpdf?: (number | null) | Media;
   updatedAt: string;
   createdAt: string;
   _status?: ('draft' | 'published') | null;
@@ -1051,6 +1054,7 @@ export interface Esmtpvideoblockinter {
 export interface Event {
   id: number;
   title: string;
+  titleev: string;
   /**
    * A short summary of the post, used for SEO and previews.
    */
@@ -1123,6 +1127,20 @@ export interface Rentalcategory {
   id: number;
   nom: string;
   image?: (number | null) | Media;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "contactuscoll".
+ */
+export interface Contactuscoll {
+  id: number;
+  Email?: string | null;
+  tel?: string | null;
+  fax?: string | null;
+  adresse?: string | null;
   updatedAt: string;
   createdAt: string;
   _status?: ('draft' | 'published') | null;
@@ -1344,6 +1362,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'rentalcategories';
         value: number | Rentalcategory;
+      } | null)
+    | ({
+        relationTo: 'contactuscoll';
+        value: number | Contactuscoll;
       } | null)
     | ({
         relationTo: 'redirects';
@@ -1958,6 +1980,7 @@ export interface UsersSelect<T extends boolean = true> {
  */
 export interface EventsSelect<T extends boolean = true> {
   title?: T;
+  titleev?: T;
   excerpt?: T;
   heroImage?: T;
   content?: T;
@@ -1994,6 +2017,7 @@ export interface FormationsSelect<T extends boolean = true> {
   endDate?: T;
   duree?: T;
   theme?: T;
+  forpdf?: T;
   updatedAt?: T;
   createdAt?: T;
   _status?: T;
@@ -2035,6 +2059,19 @@ export interface RentalitemsSelect<T extends boolean = true> {
 export interface RentalcategoriesSelect<T extends boolean = true> {
   nom?: T;
   image?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "contactuscoll_select".
+ */
+export interface ContactuscollSelect<T extends boolean = true> {
+  Email?: T;
+  tel?: T;
+  fax?: T;
+  adresse?: T;
   updatedAt?: T;
   createdAt?: T;
   _status?: T;
@@ -2351,6 +2388,11 @@ export interface Header {
  */
 export interface Footer {
   id: number;
+  contactInfo?: {
+    email?: string | null;
+    phone?: string | null;
+    address?: string | null;
+  };
   navItems?:
     | {
         title: string;
@@ -2378,6 +2420,26 @@ export interface Footer {
   socialLinks?:
     | {
         platform: string;
+        link: {
+          type?: ('reference' | 'custom') | null;
+          newTab?: boolean | null;
+          reference?:
+            | ({
+                relationTo: 'pages';
+                value: number | Page;
+              } | null)
+            | ({
+                relationTo: 'posts';
+                value: number | Post;
+              } | null);
+          url?: string | null;
+          label: string;
+        };
+        id?: string | null;
+      }[]
+    | null;
+  bottomLinks?:
+    | {
         link: {
           type?: ('reference' | 'custom') | null;
           newTab?: boolean | null;
@@ -2447,6 +2509,13 @@ export interface HeaderSelect<T extends boolean = true> {
  * via the `definition` "footer_select".
  */
 export interface FooterSelect<T extends boolean = true> {
+  contactInfo?:
+    | T
+    | {
+        email?: T;
+        phone?: T;
+        address?: T;
+      };
   navItems?:
     | T
     | {
@@ -2471,6 +2540,20 @@ export interface FooterSelect<T extends boolean = true> {
     | T
     | {
         platform?: T;
+        link?:
+          | T
+          | {
+              type?: T;
+              newTab?: T;
+              reference?: T;
+              url?: T;
+              label?: T;
+            };
+        id?: T;
+      };
+  bottomLinks?:
+    | T
+    | {
         link?:
           | T
           | {
@@ -2523,6 +2606,10 @@ export interface TaskSchedulePublish {
       | ({
           relationTo: 'rentalcategories';
           value: number | Rentalcategory;
+        } | null)
+      | ({
+          relationTo: 'contactuscoll';
+          value: number | Contactuscoll;
         } | null);
     global?: string | null;
     user?: (number | null) | User;

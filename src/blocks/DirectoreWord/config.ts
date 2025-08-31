@@ -14,14 +14,16 @@ export const DirectorBlock: Block = {
       type: 'text',
       label: 'Section Heading',
       required: true,
+      localized: true,
     },
     {
       name: 'highlight',
       type: 'text',
       label: 'Mot en surbrillance',
+      localized: true,
       required: false,
       admin: {
-        description: 'Le mot à mettre en surbrillance en vert.',
+        description: 'Le mot à mettre en surbrillance.',
       },
     },
     {
@@ -29,6 +31,7 @@ export const DirectorBlock: Block = {
       type: 'textarea',
       label: 'Description',
       required: true,
+      localized: true,
     },
     {
       name: 'image',

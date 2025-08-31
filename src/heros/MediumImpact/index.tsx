@@ -7,7 +7,18 @@ import { CMSLink } from '@/components/Link'
 import { Media } from '@/components/Media'
 import RichText from '@/components/RichText'
 
-export const MediumImpactHero: React.FC<Page['hero']> = ({ links, media, richText }) => {
+type Lang = 'en' | 'ar' | 'fr'
+
+type MediumImpactHeroProps = Page['hero'] & {
+  lang: Lang
+}
+
+export const MediumImpactHero: React.FC<MediumImpactHeroProps> = ({
+  links,
+  media,
+  richText,
+  lang,
+}) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
 
   useEffect(() => {
@@ -69,6 +80,7 @@ export const MediumImpactHero: React.FC<Page['hero']> = ({ links, media, richTex
             {links.map(({ link }, i) => (
               <li key={i}>
                 <CMSLink
+                  lang={lang}
                   {...link}
                   className="btn text-white bg-blue-600 hover:bg-blue-700 transition px-5 py-2.5 rounded-full text-sm font-medium"
                 />

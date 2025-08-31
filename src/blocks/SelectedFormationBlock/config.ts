@@ -13,6 +13,7 @@ export const FeaturedFormationsBlock: Block = {
       type: 'text',
       label: 'Titre du bloc',
       required: true,
+      localized: true,
     },
     {
       name: 'items',

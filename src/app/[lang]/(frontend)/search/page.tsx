@@ -9,13 +9,16 @@ import PageClient from './page.client'
 import { CardPostData } from '@/components/Card'
 
 type Args = {
+  params: { lang: 'en' | 'fr' | 'ar' }
   searchParams: Promise<{
     q: string
   }>
 }
 
-export default async function Page({ searchParams: searchParamsPromise }: Args) {
+export default async function Page({ params, searchParams: searchParamsPromise }: Args) {
   const { q: query } = await searchParamsPromise
+  const { lang } = params
+
   const payload = await getPayload({ config: configPromise })
 
   const posts = await payload.find({
@@ -75,7 +78,7 @@ export default async function Page({ searchParams: searchParamsPromise }: Args) 
       </div>
 
       {posts.totalDocs > 0 ? (
-        <CollectionArchive posts={posts.docs as CardPostData[]} />
+        <CollectionArchive posts={posts.docs as CardPostData[]} lang={lang} />
       ) : (
         <div className="container">No results found.</div>
       )}

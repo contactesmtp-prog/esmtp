@@ -14,21 +14,30 @@ export type CardPostData = Pick<Post, 'slug' | 'categories' | 'meta' | 'title' |
 export const Card: React.FC<{
   alignItems?: 'center'
   className?: string
-  doc?: CardPostData
+  doc?: any
   relationTo?: 'posts' | 'events'
   showCategories?: boolean
   title?: string
+  titleev?: string
+  lang: 'en' | 'ar' | 'fr'
 }> = (props) => {
   const { card, link } = useClickableCard({})
-  const { className, doc, relationTo = 'posts', showCategories, title: titleFromProps } = props
+  const {
+    className,
+    doc,
+    relationTo = 'posts',
+    showCategories,
+    titleev: titleFromProps,
+    lang,
+  } = props
 
-  const { slug, categories, meta, title } = doc || {}
+  const { slug, categories, meta, title, titleev } = doc || {}
   const { image: metaImage } = meta || {}
 
   const hasCategories = categories && Array.isArray(categories) && categories.length > 0
-  const titleToUse = titleFromProps || title
+  const titleToUse = titleFromProps || titleev
   // const sanitizedDescription = description?.replace(/\s/g, ' ')
-  const href = `/${relationTo}/${slug}`
+  const href = `/${lang}/${relationTo}/${slug}`
   const fallbackImage = metaImage || (doc as any).heroImage
   const description = (doc as any)?.excerpt || ''
   const excerpt = doc?.excerpt
@@ -45,18 +54,6 @@ export const Card: React.FC<{
       )}
     >
       <Link href={href} ref={link.ref} className="block">
-        {/* Image */}
-        {/* <div className="relative aspect-[4/3] overflow-hidden">
-          {fallbackImage && typeof fallbackImage !== 'string' ? (
-            <div className="w-full h-full transition-transform duration-500 ease-in-out group-hover:scale-105">
-              <Media resource={fallbackImage} size="100vw" />
-            </div>
-          ) : (
-            <div className="w-full h-full bg-gray-100 flex items-center justify-center text-gray-400 text-sm">
-              No Image
-            </div>
-          )}
-        </div> */}
         <div className="w-full h-60 bg-white flex items-center justify-center overflow-hidden">
           {fallbackImage && typeof fallbackImage !== 'string' ? (
             <Media

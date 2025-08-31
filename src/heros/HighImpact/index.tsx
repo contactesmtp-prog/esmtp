@@ -9,7 +9,12 @@ import { CMSLink } from '@/components/Link'
 import { Media } from '@/components/Media'
 import RichText from '@/components/RichText'
 
-export const HighImpactHero: React.FC<Page['hero']> = ({ links, media, richText }) => {
+type Lang = 'en' | 'ar' | 'fr'
+
+type HighImpactHeroProps = Page['hero'] & {
+  lang: Lang
+}
+export const HighImpactHero: React.FC<HighImpactHeroProps> = ({ links, media, richText, lang }) => {
   const { setHeaderTheme } = useHeaderTheme()
   const [idx, setIdx] = useState(0)
   const [isLoaded, setIsLoaded] = useState(false)
@@ -53,23 +58,23 @@ export const HighImpactHero: React.FC<Page['hero']> = ({ links, media, richText 
     },
   }
 
-  const linkVariants: Variants = {
-    hidden: { opacity: 0, scale: 0, rotate: -180, y: 50 },
-    visible: {
-      opacity: 1,
-      scale: 1,
-      rotate: 0,
-      y: 0,
-      transition: { type: 'spring', stiffness: 200, damping: 15, mass: 1 },
-    },
-    hover: {
-      scale: 1.15,
-      rotate: 5,
-      y: -8,
-      transition: { type: 'spring', stiffness: 400, damping: 10 },
-    },
-    tap: { scale: 0.95, rotate: -2 },
-  }
+  // const linkVariants: Variants = {
+  //   hidden: { opacity: 0, scale: 0, rotate: -180, y: 50 },
+  //   visible: {
+  //     opacity: 1,
+  //     scale: 1,
+  //     rotate: 0,
+  //     y: 0,
+  //     transition: { type: 'spring', stiffness: 200, damping: 15, mass: 1 },
+  //   },
+  //   hover: {
+  //     scale: 1.15,
+  //     rotate: 5,
+  //     y: -8,
+  //     transition: { type: 'spring', stiffness: 400, damping: 10 },
+  //   },
+  //   tap: { scale: 0.95, rotate: -2 },
+  // }
 
   const bgVariants: Variants = {
     enter: { opacity: 0, scale: 1.1, filter: 'blur(4px)' },
@@ -227,6 +232,7 @@ export const HighImpactHero: React.FC<Page['hero']> = ({ links, media, richText 
                             }}
                           />
                           <CMSLink
+                            lang={lang}
                             {...link}
                             className="
                 relative z-10 w-full h-full flex items-center justify-center

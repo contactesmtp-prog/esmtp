@@ -1,3 +1,29 @@
+// import React from 'react'
+
+// import type { Page } from '@/payload-types'
+
+// import { HighImpactHero } from '@/heros/HighImpact'
+// import { LowImpactHero } from '@/heros/LowImpact'
+// import { MediumImpactHero } from '@/heros/MediumImpact'
+
+// const heroes = {
+//   highImpact: HighImpactHero,
+//   lowImpact: LowImpactHero,
+//   mediumImpact: MediumImpactHero,
+// }
+
+// export const RenderHero: React.FC<Page['hero']> = (props) => {
+//   const { type } = props || {}
+
+//   if (!type || type === 'none') return null
+
+//   const HeroToRender = heroes[type]
+
+//   if (!HeroToRender) return null
+
+//   return <HeroToRender {...props} />
+// }
+
 import React from 'react'
 
 import type { Page } from '@/payload-types'
@@ -12,8 +38,14 @@ const heroes = {
   mediumImpact: MediumImpactHero,
 }
 
-export const RenderHero: React.FC<Page['hero']> = (props) => {
-  const { type } = props || {}
+type Lang = 'en' | 'ar' | 'fr'
+
+type RenderHeroProps = Page['hero'] & {
+  lang: Lang
+}
+
+export const RenderHero: React.FC<RenderHeroProps> = (props) => {
+  const { type, lang } = props || {}
 
   if (!type || type === 'none') return null
 
@@ -21,5 +53,5 @@ export const RenderHero: React.FC<Page['hero']> = (props) => {
 
   if (!HeroToRender) return null
 
-  return <HeroToRender {...props} />
+  return <HeroToRender {...props} lang={lang} />
 }

@@ -21,6 +21,7 @@ import { Formations } from './collections/Formations'
 import { Themes } from './collections/Themes'
 import { rentalItems } from './collections/RentalItems'
 import { Rentalcategories } from './collections/RentalCategories'
+import { ContactUs } from './collections/ContactUs'
 import sharp from 'sharp'
 
 //S3 STORAGE
@@ -33,8 +34,8 @@ const agent = new http.Agent({
 })
 
 const customHandler = new NodeHttpHandler({
-  connectionTimeout: 1000,
-  socketTimeout: 5000,
+  connectionTimeout: 5000,
+  socketTimeout: 10000,
   httpAgent: agent,
 })
 const filename = fileURLToPath(import.meta.url)
@@ -100,7 +101,9 @@ export default buildConfig({
     Themes,
     rentalItems,
     Rentalcategories,
+    ContactUs,
   ],
+
   cors: [getServerSideURL()].filter(Boolean),
   globals: [Header, Footer],
   plugins: [
@@ -146,5 +149,27 @@ export default buildConfig({
       },
     },
     tasks: [],
+  },
+
+  localization: {
+    locales: [
+      {
+        label: 'English',
+        code: 'en',
+      },
+      {
+        label: 'French',
+        code: 'fr',
+      },
+      {
+        label: 'Arabic',
+        code: 'ar',
+        // opt-in to setting default text-alignment on Input fields to rtl (right-to-left)
+        // when current locale is rtl
+        rtl: true,
+      },
+    ],
+    defaultLocale: 'en', // required
+    fallback: true, // defaults to true
   },
 })

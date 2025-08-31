@@ -11,6 +11,7 @@ export const LastEvent: Block = {
       type: 'text',
       label: 'Header',
       required: true,
+      localized: true,
     },
   ],
 }

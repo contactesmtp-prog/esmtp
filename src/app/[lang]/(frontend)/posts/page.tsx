@@ -10,10 +10,11 @@ import PageClient from './page.client'
 
 export const dynamic = 'force-static'
 export const revalidate = 600
+type Lang = 'en' | 'fr' | 'ar'
 
-export default async function Page() {
+export default async function Page({ params }: { params: { lang: Lang } }) {
   const payload = await getPayload({ config: configPromise })
-
+  const { lang } = params
   const posts = await payload.find({
     collection: 'posts',
     depth: 1,
@@ -45,7 +46,7 @@ export default async function Page() {
         />
       </div>
 
-      <CollectionArchive posts={posts.docs} />
+      <CollectionArchive posts={posts.docs} lang={lang} />
 
       <div className="container">
         {posts.totalPages > 1 && posts.page && (

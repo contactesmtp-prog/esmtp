@@ -31,6 +31,7 @@ export const rentalItems: CollectionConfig = {
       label: 'Nom du article de location',
       type: 'text',
       required: true,
+      localized: true,
     },
     {
       name: 'image',
@@ -43,6 +44,7 @@ export const rentalItems: CollectionConfig = {
       name: 'description',
       label: 'Description',
       type: 'textarea',
+      localized: true,
     },
     {
       name: 'category',
@@ -66,6 +68,7 @@ export const rentalItems: CollectionConfig = {
           label: 'Point',
           type: 'text',
           required: true,
+          localized: true,
         },
       ],
     },

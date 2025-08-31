@@ -5,7 +5,13 @@ import UpcomingFormationsClient from './UpcomingFormations.client' // 👈 clien
 
 type Formation = RequiredDataFromCollectionSlug<'formations'>
 
-export const LastFormationBlock = async ({ header }: { header: string }) => {
+export const LastFormationBlock = async ({
+  header,
+  lang,
+}: {
+  header: string
+  lang: 'en' | 'ar' | 'fr'
+}) => {
   const { isEnabled: draft } = await draftMode()
   const payload = await getPayload({ config: configPromise })
 
@@ -18,6 +24,7 @@ export const LastFormationBlock = async ({ header }: { header: string }) => {
   const { docs } = await payload.find({
     collection: 'formations',
     draft,
+    locale: lang,
     overrideAccess: draft,
     pagination: false,
     limit: 10,
@@ -30,5 +37,5 @@ export const LastFormationBlock = async ({ header }: { header: string }) => {
     },
   })
 
-  return <UpcomingFormationsClient header={header} formations={docs as Formation[]} />
+  return <UpcomingFormationsClient header={header} formations={docs as Formation[]} lang={lang} />
 }

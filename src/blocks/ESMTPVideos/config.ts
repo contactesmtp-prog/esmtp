@@ -13,6 +13,7 @@ export const ESMTPVideosBlock: Block = {
       type: 'text',
       required: true,
       label: 'Section Title',
+      localized: true,
     },
     {
       name: 'videos',
@@ -24,6 +25,7 @@ export const ESMTPVideosBlock: Block = {
           name: 'title',
           type: 'text',
           required: true,
+          localized: true,
         },
         {
           name: 'url',

@@ -1,5 +1,3 @@
-// // src/app/(frontend)/devisLoc/page.tsx
-
 // import { getPayload } from 'payload'
 // import configPromise from '@payload-config'
 // import { Rentalitem } from '@/payload-types'
@@ -43,12 +41,16 @@ import { Rentalitem } from '@/payload-types'
 import { RentalDevisForm } from './Form'
 
 type Props = {
+  params: {
+    lang: 'en' | 'fr' | 'ar'
+  }
   searchParams: Promise<{
     rental?: string
   }>
 }
 
-export default async function DevisLocPage({ searchParams }: Props) {
+export default async function DevisLocPage({ params, searchParams }: Props) {
+  const { lang } = params
   const resolvedSearchParams = await searchParams
   const rentalId = resolvedSearchParams.rental
 
@@ -60,6 +62,7 @@ export default async function DevisLocPage({ searchParams }: Props) {
       rental = await payload.findByID({
         collection: 'rentalitems',
         id: rentalId,
+        locale: lang,
       })
     } catch {
       rental = null
@@ -68,8 +71,12 @@ export default async function DevisLocPage({ searchParams }: Props) {
 
   return (
     <div className="max-w-2xl mx-auto px-4 py-12">
-      <h1 className="text-2xl font-bold mb-6">Demande de devis - Article de location</h1>
-      <RentalDevisForm rental={rental} />
+      <h1 className="text-2xl font-bold mb-6">
+        {lang === 'fr' && 'Demande de devis - Article de location'}
+        {lang === 'en' && 'Quote Request - Rental Item'}
+        {lang === 'ar' && 'طلب عرض سعر - مادة للإيجار'}
+      </h1>
+      <RentalDevisForm rental={rental} lang={lang} />
     </div>
   )
 }

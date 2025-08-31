@@ -21,6 +21,7 @@ export const ThemeOverviewBlock: Block = {
       type: 'text',
       label: 'Header',
       required: true,
+      localized: true,
     },
   ],
 }
