@@ -14,11 +14,12 @@ export const revalidate = 600
 type Args = {
   params: Promise<{
     pageNumber: string
+    lang: 'ar' | 'fr' | 'en'
   }>
 }
 
 export default async function Page({ params: paramsPromise }: Args) {
-  const { pageNumber } = await paramsPromise
+  const { pageNumber, lang } = await paramsPromise
   const payload = await getPayload({ config: configPromise })
 
   const sanitizedPageNumber = Number(pageNumber)
@@ -51,7 +52,7 @@ export default async function Page({ params: paramsPromise }: Args) {
         />
       </div>
 
-      <CollectionArchive posts={posts.docs} />
+      <CollectionArchive posts={posts.docs} lang={lang} />
 
       <div className="container">
         {posts?.page && posts?.totalPages > 1 && (

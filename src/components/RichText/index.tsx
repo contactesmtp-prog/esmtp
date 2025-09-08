@@ -66,11 +66,25 @@ type Props = {
   data: DefaultTypedEditorState
   enableGutter?: boolean
   enableProse?: boolean
+  lang?: 'en' | 'fr' | 'ar'
 } & React.HTMLAttributes<HTMLDivElement>
 
 export default function RichText(props: Props) {
-  const { className, enableProse = true, enableGutter = true, ...rest } = props
+  const { className, enableProse = true, enableGutter = true, lang = 'en', ...rest } = props
   return (
+    // <ConvertRichText
+    //   converters={jsxConverters}
+    //   className={cn(
+    //     'payload-richtext',
+    //     {
+    //       container: enableGutter,
+    //       'max-w-none': !enableGutter,
+    //       'mx-auto prose md:prose-md dark:prose-invert': enableProse,
+    //     },
+    //     className,
+    //   )}
+    //   {...rest}
+    // />
     <ConvertRichText
       converters={jsxConverters}
       className={cn(
@@ -79,9 +93,11 @@ export default function RichText(props: Props) {
           container: enableGutter,
           'max-w-none': !enableGutter,
           'mx-auto prose md:prose-md dark:prose-invert': enableProse,
+          'prose-rtl text-right': lang === 'ar', // ✅ custom class for RTL
         },
         className,
       )}
+      dir={lang === 'ar' ? 'rtl' : 'ltr'} // ✅ tells browser to render RTL
       {...rest}
     />
   )

@@ -1153,9 +1153,11 @@ export interface Contactuscoll {
  */
 export interface SearchGlob {
   id: number;
-  page: number | Page;
-  titleFr?: string | null;
-  titleAr?: string | null;
+  linkType: 'cms' | 'fixed';
+  cmsPage?: (number | null) | Page;
+  fixedPage?: ('contact' | 'events' | 'services') | null;
+  titleFr: string;
+  titleAr: string;
   updatedAt: string;
   createdAt: string;
 }
@@ -2099,7 +2101,9 @@ export interface ContactuscollSelect<T extends boolean = true> {
  * via the `definition` "searchGlob_select".
  */
 export interface SearchGlobSelect<T extends boolean = true> {
-  page?: T;
+  linkType?: T;
+  cmsPage?: T;
+  fixedPage?: T;
   titleFr?: T;
   titleAr?: T;
   updatedAt?: T;

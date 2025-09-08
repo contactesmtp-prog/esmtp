@@ -158,6 +158,7 @@ export const ContentBlock: React.FC<Props> = (props) => {
                     <div className="relative bg-white/60 backdrop-blur-sm rounded-2xl p-8 lg:p-10 shadow-sm border border-slate-200/50 hover:shadow-lg hover:border-slate-300/50 transition-all duration-300 h-full">
                       {richText && (
                         <RichText
+                          lang={lang}
                           data={richText}
                           enableGutter={false}
                           className="prose prose-slate max-w-none ..."

@@ -194,6 +194,7 @@ export default async function Post({ params: paramsPromise }: Args) {
 
       <div className="relative bg-white/60 backdrop-blur-sm rounded-2xl p-8 lg:p-10 shadow-sm border border-slate-200/50 hover:shadow-lg hover:border-slate-300/50 transition-all duration-300 h-full">
         <RichText
+          lang={lang}
           data={post.content}
           enableGutter={false}
           className="prose prose-slate max-w-none

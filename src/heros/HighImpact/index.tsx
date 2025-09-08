@@ -170,6 +170,7 @@ export const HighImpactHero: React.FC<HighImpactHeroProps> = ({ links, media, ri
                 >
                   <RichText
                     data={richText}
+                    lang={lang}
                     enableGutter={false}
                     className="
                       [&>h1]:text-5xl [&>h1]:md:text-7xl [&>h1]:font-black [&>h1]:leading-tight [&>h1]:mb-6
