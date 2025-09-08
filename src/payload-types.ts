@@ -78,6 +78,7 @@ export interface Config {
     rentalitems: Rentalitem;
     rentalcategories: Rentalcategory;
     contactuscoll: Contactuscoll;
+    searchGlob: SearchGlob;
     redirects: Redirect;
     forms: Form;
     'form-submissions': FormSubmission;
@@ -100,6 +101,7 @@ export interface Config {
     rentalitems: RentalitemsSelect<false> | RentalitemsSelect<true>;
     rentalcategories: RentalcategoriesSelect<false> | RentalcategoriesSelect<true>;
     contactuscoll: ContactuscollSelect<false> | ContactuscollSelect<true>;
+    searchGlob: SearchGlobSelect<false> | SearchGlobSelect<true>;
     redirects: RedirectsSelect<false> | RedirectsSelect<true>;
     forms: FormsSelect<false> | FormsSelect<true>;
     'form-submissions': FormSubmissionsSelect<false> | FormSubmissionsSelect<true>;
@@ -1147,6 +1149,18 @@ export interface Contactuscoll {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "searchGlob".
+ */
+export interface SearchGlob {
+  id: number;
+  page: number | Page;
+  titleFr?: string | null;
+  titleAr?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "redirects".
  */
 export interface Redirect {
@@ -1366,6 +1380,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'contactuscoll';
         value: number | Contactuscoll;
+      } | null)
+    | ({
+        relationTo: 'searchGlob';
+        value: number | SearchGlob;
       } | null)
     | ({
         relationTo: 'redirects';
@@ -2075,6 +2093,17 @@ export interface ContactuscollSelect<T extends boolean = true> {
   updatedAt?: T;
   createdAt?: T;
   _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "searchGlob_select".
+ */
+export interface SearchGlobSelect<T extends boolean = true> {
+  page?: T;
+  titleFr?: T;
+  titleAr?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

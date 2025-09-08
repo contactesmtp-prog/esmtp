@@ -62,7 +62,7 @@ export default async function Page({ params, searchParams: searchParamsPromise }
         }
       : {}),
   })
-  console.log('Here Our posts', posts)
+  // console.log('Here Our posts', posts)
 
   return (
     <div className="pt-24 pb-24">
@@ -88,6 +88,6 @@ export default async function Page({ params, searchParams: searchParamsPromise }
 
 export function generateMetadata(): Metadata {
   return {
-    title: `Payload Website Template Search`,
+    title: `ESMTP | Search`,
   }
 }

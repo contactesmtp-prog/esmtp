@@ -23,6 +23,7 @@ import { rentalItems } from './collections/RentalItems'
 import { Rentalcategories } from './collections/RentalCategories'
 import { ContactUs } from './collections/ContactUs'
 import sharp from 'sharp'
+import { SearchGlob } from './collections/GlobSearch'
 
 //S3 STORAGE
 import { s3Storage } from '@payloadcms/storage-s3'
@@ -102,6 +103,7 @@ export default buildConfig({
     rentalItems,
     Rentalcategories,
     ContactUs,
+    SearchGlob,
   ],
 
   cors: [getServerSideURL()].filter(Boolean),

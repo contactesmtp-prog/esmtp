@@ -12,6 +12,7 @@ import { slugField } from '@/fields/slug'
 import { populatePublishedAt } from '../../hooks/populatePublishedAt'
 import { generatePreviewPath } from '../../utilities/generatePreviewPath'
 import { revalidateDelete, revalidatePage } from './hooks/revalidatePage'
+
 //New
 import { DirectorBlock } from '@/blocks/DirectoreWord/config'
 import { whoWeAre } from '@/blocks/WhoWeAreBlock/config'
