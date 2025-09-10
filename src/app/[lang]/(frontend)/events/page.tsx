@@ -55,22 +55,12 @@ export default async function Page({ params }: { params: { lang: Lang } }) {
         <CollectionArchive posts={posts.docs} lang={lang} />
       </div>
 
-      {/* Optional pagination */}
-      {/* <div className="container mt-12">
-        {posts.totalPages > 1 && posts.page && (
-          <Pagination page={posts.page} totalPages={posts.totalPages} />
-        )}
-      </div> */}
+   
     </div>
   )
 }
 
-// export function generateMetadata({ params }: { params: { lang: Lang } }): Metadata {
-//   const { lang } = params
-//   return {
-//     title: titles[lang],
-//   }
-// }
+
 export const metadata: Metadata = {
   title: 'ESMTP | Events', // 👈 fixed title
   description: 'Welcome to ESMTP official website.',

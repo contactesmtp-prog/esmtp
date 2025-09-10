@@ -26,8 +26,7 @@ export async function POST(req: Request) {
 
     // ✅ Send to Google Sheets webhook
     const webhookURL =
-      'https://script.google.com/macros/s/AKfycbw7Siw1nAYO75A-pkLkd0wzw-rfi56ZhsdwWpdGK04eIkwSyZjb2RMl-oBfFU2IdCiQ/exec'
-
+      'https://script.google.com/macros/s/AKfycbwFjkib6sS3TOjHHeUGQ_ceQNSmPa192K5LhxS01dNRIVqsJovnOpK74-s60GTcG94FcA/exec'
     const response = await fetch(webhookURL, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },

@@ -1,8 +1,6 @@
 // File: src/app/api/submit-contact/route.ts
 
 import { NextResponse } from 'next/server'
-import { getPayload } from 'payload'
-import configPromise from '@payload-config'
 
 export async function POST(req: Request) {
   try {
@@ -14,24 +12,9 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: 'Missing required fields' }, { status: 400 })
     }
 
-    // Optional: Save to Payload CMS if needed
-    const payload = await getPayload({ config: configPromise })
-
-    // If you have a "contacts" collection in Payload, save it
-    // await payload.create({
-    //   collection: 'contacts',
-    //   data: {
-    //     nom,
-    //     email,
-    //     entreprise,
-    //     telephone,
-    //     message,
-    //   },
-    // })
-
     // Send data to Google Sheets via webhook
-    const webhookURL = 'https://script.google.com/macros/s/YOUR_WEBHOOK_URL_HERE/exec'
-
+    const webhookURL =
+      'https://script.google.com/macros/s/AKfycbxkbM7XW5Yqw_j5iakjPsNuqJPx-QZdiR9GHQIXUzoAlxLj0NKLFyGloFE8FXhX_703/exec'
     await fetch(webhookURL, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },

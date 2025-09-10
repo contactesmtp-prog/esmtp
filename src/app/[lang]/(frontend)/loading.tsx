@@ -1,13 +1,3 @@
-// 'use client'
-
-// export default function Loading() {
-//   return (
-//     <div className="fixed inset-0 z-50 flex items-center justify-center bg-white/60 backdrop-blur-sm">
-//       <div className="animate-spin rounded-full h-12 w-12 border-t-4 border-[#0C2E53] border-opacity-50"></div>
-//     </div>
-//   )
-// }
-
 'use client'
 
 import { Sparkles, Package, Users } from 'lucide-react'

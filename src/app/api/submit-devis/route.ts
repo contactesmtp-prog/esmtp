@@ -18,26 +18,16 @@ export async function POST(req: Request) {
       id: formationId,
     })
 
-    // console.log('Sending to Google Sheets:', {
-    //   nomComplet: nom,
-    //   email,
-    //   telephone,
-    //   entreprise,
-    //   message,
-    //   formationId,
-    //   formationNom: formation.nom,
-    // })
-
     const webhookURL =
-      'https://script.google.com/macros/s/AKfycbw3dY3iqhh49qCSD7oo4szDzrsvowUnBkCK56hzUM3geiCIzwdtl7H8z15vWsRWZE8/exec'
+      'https://script.google.com/macros/s/AKfycbyMaNLhi9a4GMNHyWp6TWaKX0Iy-d8dSsYEahngORuodiPiR0pvYqKfVTrIhKKJ2F2s/exec'
     await fetch(webhookURL, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         nomComplet: nom,
         email,
-        entreprise,
         telephone,
+        entreprise,
         message,
         formationId,
         formationNom: formation.nom,
