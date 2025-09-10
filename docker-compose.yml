@@ -36,28 +36,23 @@ version: '3.9'
 services:
   postgres-esmtp:
     image: postgres:17
-    
+    container_name: postgres-esmtp
     restart: always
     ports:
       - "5434:5432"
     volumes:
-        - esmtp-postgres:/var/lib/postgresql/data
+      - esmtp-postgres:/var/lib/postgresql/data
     env_file:
-        - .env.docker
+      - .env.docker
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U esmtp_user -d esmtp_DB"]
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
       interval: 10s
       timeout: 5s
       retries: 5
 
   minio-esmtp:
     image: minio/minio:latest
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-
+    container_name: minio-esmtp
     restart: always
     ports:
       - "9100:9000"  # S3 API
@@ -66,50 +61,40 @@ services:
       - minio-esmtp:/data
     env_file:
       - .env.docker
-    environment:
-      MINIO_ROOT_USER: ${S3_ACCESS_KEY_ID}
-      MINIO_ROOT_PASSWORD: ${S3_SECRET_ACCESS_KEY}  
     command: server /data --console-address ":9001"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
   app-esmtp:
     build:
       context: .
-      dockerfile: Dockerfile
-      args:
-        PAYLOAD_SECRET: ${PAYLOAD_SECRET}
-        DATABASE_URI: ${DATABASE_URI}
-        # SERVER_URL: ${SERVER_URL}
-    
+      dockerfile: Dockerfile 
+    container_name: app-esmtp
     depends_on:
       postgres-esmtp:
         condition: service_healthy
       minio-esmtp:
         condition: service_healthy
-    # ports:
-    #   - "3000:3000"  
     env_file:
       - .env.docker
-   
-    command: >
-      sh -c "
-          echo '🛠️ Building Next.js app...';
-          pnpm build &&
-          echo '🚀 Starting server...';
-          pnpm start
-           "
+    command: sh -c "rm -rf .next && pnpm build && pnpm start"
 
   nginx-esmtp:
     image: nginx:stable-alpine
-    
+    container_name: nginx-esmtp
     restart: always
-    ports:
-      - "80:80"
-    volumes:
-      - ./nginx.conf:/etc/nginx/nginx.conf:ro
     depends_on:
       - app-esmtp
+    ports:
+      - "8080:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
 
 volumes:
   esmtp-postgres:
   minio-esmtp:
+
    

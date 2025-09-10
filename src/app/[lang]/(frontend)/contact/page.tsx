@@ -7,11 +7,11 @@ import { Mail, Phone, MapPin, ExternalLink, Send, MessageSquare, Sparkles } from
 import configPromise from '@payload-config'
 import { getPayload } from 'payload'
 
-export default async function ContactPage({
-  params,
-}: {
+type Args = {
   params: Promise<{ lang: 'en' | 'fr' | 'ar' }>
-}) {
+}
+
+export default async function ContactPage({ params }: Args) {
   const { lang } = await params
   const payload = await getPayload({ config: configPromise })
 

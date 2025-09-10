@@ -4,16 +4,16 @@ import { Rentalitem } from '@/payload-types'
 import { RentalDevisForm } from './Form'
 
 type Props = {
-  params: {
+  params: Promise<{
     lang: 'en' | 'fr' | 'ar'
-  }
+  }>
   searchParams: Promise<{
     rental?: string
   }>
 }
 
 export default async function DevisLocPage({ params, searchParams }: Props) {
-  const { lang } = params
+  const { lang } = await params
   const resolvedSearchParams = await searchParams
   const rentalId = resolvedSearchParams.rental
 

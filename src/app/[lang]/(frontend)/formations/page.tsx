@@ -3,18 +3,26 @@ import configPromise from '@payload-config'
 import { Formation } from '@/payload-types'
 import { FormationsClient } from './FormationsClient'
 
+// type Props = {
+//   params: { lang: 'en' | 'fr' | 'ar' } // restrict to supported languages
+//   searchParams?: {
+//     theme?: string
+//   }
+// }
 type Props = {
-  params: { lang: 'en' | 'fr' | 'ar' } // restrict to supported languages
-  searchParams?: {
-    theme?: string
-  }
+  params: Promise<{ lang: 'en' | 'fr' | 'ar' }>
+  searchParams?: Promise<{ theme?: string }>
 }
 
-export default async function FormationsPage({ params, searchParams }: Props) {
-  const { lang } = params
+export default async function FormationsPage(props: Props) {
+  const { params, searchParams } = props
+  const resolvedParams = await params
+  const resolvedSearchParams = searchParams ? await searchParams : {}
+
+  const { lang } = resolvedParams
   const payload = await getPayload({ config: configPromise })
 
-  const themeId = searchParams?.theme
+  const themeId = resolvedSearchParams?.theme
   let themeInfo = null
 
   if (themeId) {

@@ -4,8 +4,10 @@ import type { CallToActionBlock as CTABlockProps } from '@/payload-types'
 
 import RichText from '@/components/RichText'
 import { CMSLink } from '@/components/Link'
-
-export const CallToActionBlock: React.FC<CTABlockProps> = ({ links, richText }) => {
+type Props = CTABlockProps & {
+  lang?: 'en' | 'ar' | 'fr'
+}
+export const CallToActionBlock: React.FC<Props> = ({ links, richText, lang }) => {
   return (
     <div className="container">
       <div className="bg-card rounded border-border border p-4 flex flex-col gap-8 md:flex-row md:justify-between md:items-center">
@@ -14,7 +16,7 @@ export const CallToActionBlock: React.FC<CTABlockProps> = ({ links, richText }) 
         </div>
         <div className="flex flex-col gap-8">
           {(links || []).map(({ link }, i) => {
-            return <CMSLink key={i} size="lg" {...link} />
+            return <CMSLink key={i} size="lg" {...link} lang={lang} />
           })}
         </div>
       </div>

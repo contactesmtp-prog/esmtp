@@ -34,8 +34,9 @@ export const RentalDevisForm: React.FC<{ rental: Rentalitem | null; lang: Lang }
         sending: 'Envoi en cours…',
         policyTitle: 'Politique de confidentialité',
         policyText1:
-          'Nous collectons vos données exclusivement pour répondre à votre demande de devis. Elles ne seront ni vendues ni partagées à des tiers non autorisés.',
-        policyText2: 'Pour plus d’informations, contactez-nous à',
+          'Je consens librement à ce que l’École Supérieure de Management des Travaux Publics (ESMTP) collecte et traite les données personnelles suivantes me concernant : Nom et prénom ; Adresse e-mail ; Numéro de téléphone. Ces données sont collectées exclusivement dans le but d’établir un devis relatif à la formation demandée.',
+        policyText2:
+          'Conformément à la loi n° 18-07 du 10 juin 2018, modifiée et complétée par la loi n° 25-11, mes données ne seront utilisées que dans ce cadre, elles ne seront ni cédées ni partagées sans mon autorisation expresse, elles seront conservées le temps nécessaire au traitement de ma demande, et je peux exercer mes droits en contactant ESMTP.',
         close: 'Fermer',
         home: "Retour à l'accueil",
       },
@@ -56,8 +57,9 @@ export const RentalDevisForm: React.FC<{ rental: Rentalitem | null; lang: Lang }
         sending: 'Sending…',
         policyTitle: 'Privacy Policy',
         policyText1:
-          'We collect your data exclusively to respond to your quote request. It will not be sold or shared with unauthorized third parties.',
-        policyText2: 'For more information, contact us at',
+          'I freely consent to the École Supérieure de Management des Travaux Publics (ESMTP) collecting and processing the following personal data concerning me: First and last name; Email address; Phone number. This data is collected solely for the purpose of providing a quote for the requested training.',
+        policyText2:
+          'In accordance with Law No. 18-07 of June 10, 2018, amended and supplemented by Law No. 25-11, my data will only be used for this purpose, it will not be shared with third parties without my express authorization, it will be kept for the time necessary to process the request, and I can exercise my rights by contacting ESMTP.',
         close: 'Close',
         home: 'Back to Home',
       },
@@ -78,8 +80,9 @@ export const RentalDevisForm: React.FC<{ rental: Rentalitem | null; lang: Lang }
         sending: 'جاري الإرسال…',
         policyTitle: 'سياسة الخصوصية',
         policyText1:
-          'نقوم بجمع بياناتك فقط للرد على طلب عرض السعر الخاص بك. لن يتم بيعها أو مشاركتها مع أي طرف ثالث غير مصرح به.',
-        policyText2: 'لمزيد من المعلومات، تواصل معنا عبر',
+          'أوافق بحرية على قيام المدرسة العليا لإدارة الأشغال العامة (ESMTP) بجمع ومعالجة البيانات الشخصية التالية المتعلقة بي: الاسم واللقب؛ عنوان البريد الإلكتروني؛ رقم الهاتف. يتم جمع هذه البيانات حصريًا لغرض إعداد عرض أسعار يتعلق بالتدريب المطلوب.',
+        policyText2:
+          'وفقًا للقانون رقم 18-07 المؤرخ 10 يونيو 2018، المعدل والمكمل بالقانون رقم 25-11، لن يتم استخدام بياناتي إلا في هذا الإطار، ولن يتم نقلها أو مشاركتها مع أطراف ثالثة دون إذني الصريح، وسيتم الاحتفاظ بها طوال المدة اللازمة لمعالجة طلبي، ويمكنني ممارسة حقوقي عبر الاتصال بـ ESMTP.',
         close: 'إغلاق',
         home: 'العودة إلى الصفحة الرئيسية',
       },

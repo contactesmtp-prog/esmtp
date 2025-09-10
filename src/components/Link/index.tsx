@@ -86,7 +86,7 @@ type CMSLinkType = {
   size?: ButtonProps['size'] | null
   type?: 'custom' | 'reference' | null
   url?: string | null
-  lang: 'en' | 'ar' | 'fr' // 👈 added language prop
+  lang?: 'en' | 'ar' | 'fr' // 👈 added language prop
 }
 
 export const CMSLink: React.FC<CMSLinkType> = (props) => {
