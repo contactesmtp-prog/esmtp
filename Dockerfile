@@ -143,11 +143,65 @@
 
 # ENTRYPOINT ["/sbin/tini", "--"]
 # CMD ["pnpm", "start"]
+
+
+
 # --- Base image
+# FROM node:18
+
+
+# # Install PostgreSQL client (for pg_isready)
+# RUN apt-get update && apt-get install -y postgresql-client
+
+# # Set working dir
+# WORKDIR /app
+
+# # Install pnpm
+# RUN npm install -g pnpm
+
+
+# # Accept build-time arguments
+# ARG PAYLOAD_SECRET
+# ARG DATABASE_URI
+# # ARG SERVER_URL
+
+# # Set them as env for the build process
+# ENV PAYLOAD_SECRET=$PAYLOAD_SECRET
+# ENV DATABASE_URI=$DATABASE_URI
+# # ENV SERVER_URL=$SERVER_URL
+
+
+# # Copy core files
+# COPY ./package.json ./pnpm-lock.yaml ./
+# COPY tsconfig.json ./              
+# COPY next.config.js ./             
+# COPY redirects.js ./
+# COPY ./public ./public
+# COPY next-sitemap.config.cjs ./   
+
+# # Copy source
+# COPY ./src ./src
+# COPY tailwind.config.mjs ./
+# COPY postcss.config.js ./
+
+
+# # Install dependencies
+# RUN pnpm install --frozen-lockfile
+
+# # Build Next.js + Payload
+# #RUN pnpm build 
+
+# # Expose port for the app
+# EXPOSE 3000
+
+# # Start the app
+# CMD ["pnpm", "start"]
+
+
+
 FROM node:18
 
-
-# Install PostgreSQL client (for pg_isready)
+# Install PostgreSQL client (for pg_isready etc.)
 RUN apt-get update && apt-get install -y postgresql-client
 
 # Set working dir
@@ -156,42 +210,37 @@ WORKDIR /app
 # Install pnpm
 RUN npm install -g pnpm
 
-
-# Accept build-time arguments
+# Accept build-time arguments (optional, but usually overridden at runtime by .env.docker)
 ARG PAYLOAD_SECRET
 ARG DATABASE_URI
-# ARG SERVER_URL
 
-# Set them as env for the build process
+# Make them available at build time
 ENV PAYLOAD_SECRET=$PAYLOAD_SECRET
 ENV DATABASE_URI=$DATABASE_URI
-# ENV SERVER_URL=$SERVER_URL
 
-
-# Copy core files
+# Copy dependency files
 COPY ./package.json ./pnpm-lock.yaml ./
-COPY tsconfig.json ./              
-COPY next.config.js ./             
-COPY redirects.js ./
-COPY ./public ./public
-COPY next-sitemap.config.cjs ./   
 
-# Copy source
-COPY ./src ./src
+# Copy configs
+COPY tsconfig.json ./
+COPY next.config.js ./
+COPY redirects.js ./
+COPY next-sitemap.config.cjs ./
 COPY tailwind.config.mjs ./
 COPY postcss.config.js ./
 
+# Copy public + source
+COPY ./public ./public
+COPY ./src ./src
 
 # Install dependencies
 RUN pnpm install --frozen-lockfile
 
 # Build Next.js + Payload
-#RUN pnpm build 
+RUN pnpm build
 
 # Expose port for the app
 EXPOSE 3000
 
 # Start the app
 CMD ["pnpm", "start"]
-
-
