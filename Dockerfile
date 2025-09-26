@@ -233,10 +233,16 @@ COPY postcss.config.js ./
 COPY ./public ./public
 COPY ./src ./src
 
+# # Install dependencies
+# RUN pnpm install --frozen-lockfile
+
+# # Build Next.js + Payload
+# RUN pnpm build
 # Install dependencies
 RUN pnpm install --frozen-lockfile
 
-# Build Next.js + Payload
+# Build Next.js, but skip Payload migrations (DB isn’t running during build)
+ENV NEXT_SKIP_PAYLOAD_MIGRATIONS=1
 RUN pnpm build
 
 # Expose port for the app
