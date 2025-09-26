@@ -90,6 +90,7 @@ export default buildConfig({
     pool: {
       connectionString: process.env.DATABASE_URI || '',
     },
+    migrationDir: 'src/migrations',
   }),
   collections: [
     Pages,
