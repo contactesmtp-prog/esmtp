@@ -2,7 +2,9 @@ import { getPayload } from 'payload'
 import configPromise from '@payload-config'
 import { Formation } from '@/payload-types'
 import { FormationsClient } from './FormationsClient'
-
+export const dynamic = 'force-dynamic'
+export const revalidate = 0
+export const fetchCache = 'force-no-store'
 // type Props = {
 //   params: { lang: 'en' | 'fr' | 'ar' } // restrict to supported languages
 //   searchParams?: {
