@@ -161,7 +161,23 @@ export const ContentBlock: React.FC<Props> = (props) => {
                           lang={lang}
                           data={richText}
                           enableGutter={false}
-                          className="prose prose-slate max-w-none ..."
+                          className="prose prose-slate max-w-none
+                          [&>h1]:text-4xl [&>h1]:lg:text-5xl [&>h1]:font-bold [&>h1]:leading-tight [&>h1]:text-slate-900 [&>h1]:mb-6
+                          [&>h2]:text-3xl [&>h2]:lg:text-4xl [&>h2]:font-bold [&>h2]:leading-tight [&>h2]:text-slate-800 [&>h2]:mb-5
+                          [&>h3]:text-2xl [&>h3]:lg:text-3xl [&>h3]:font-semibold [&>h3]:leading-snug [&>h3]:text-slate-800 [&>h3]:mb-4
+                          [&>h4]:text-xl [&>h4]:lg:text-2xl [&>h4]:font-semibold [&>h4]:text-slate-700 [&>h4]:mb-3
+                          [&>h5]:text-lg [&>h5]:font-medium [&>h5]:text-slate-700 [&>h5]:mb-3
+                          [&>h6]:text-base [&>h6]:font-medium [&>h6]:text-slate-600 [&>h6]:mb-2
+                          [&>p]:text-lg [&>p]:leading-relaxed [&>p]:text-slate-600 [&>p]:mb-4 [&>p:last-child]:mb-0
+                          [&>ul]:text-lg [&>ul]:text-slate-600 [&>ul]:mb-6
+                          [&>ol]:text-lg [&>ol]:text-slate-600 [&>ol]:mb-6
+                          [&>li]:mb-2
+                          [&>blockquote]:border-l-4 [&>blockquote]:border-blue-500 [&>blockquote]:pl-6 [&>blockquote]:italic [&>blockquote]:text-slate-700 [&>blockquote]:bg-slate-50 [&>blockquote]:py-4 [&>blockquote]:rounded-r-lg
+                          [&>code]:bg-slate-100 [&>code]:px-2 [&>code]:py-1 [&>code]:rounded [&>code]:text-sm [&>code]:font-mono [&>code]:text-slate-800
+                          [&>pre]:bg-slate-900 [&>pre]:text-slate-100 [&>pre]:p-4 [&>pre]:rounded-lg [&>pre]:overflow-x-auto
+                          [&_strong]:font-semibold [&_strong]:text-slate-800
+                          [&_em]:italic [&_em]:text-slate-700
+                          [&_a]:text-blue-600 [&_a]:hover:text-blue-700 [&_a]:underline [&_a]:decoration-2 [&_a]:underline-offset-2"
                         />
                       )}
 
