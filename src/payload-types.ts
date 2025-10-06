@@ -1000,8 +1000,18 @@ export interface FeaturedFormations {
 export interface Formation {
   id: number;
   nom: string;
+  /**
+   * Déprécié — sera supprimé plus tard.
+   */
   startDate: string;
+  /**
+   * Déprécié — sera supprimé plus tard.
+   */
   endDate: string;
+  /**
+   * Identifiant interne de la formation.
+   */
+  reference?: string | null;
   duree: string;
   theme: number | Theme;
   forpdf?: (number | null) | Media;
@@ -2035,6 +2045,7 @@ export interface FormationsSelect<T extends boolean = true> {
   nom?: T;
   startDate?: T;
   endDate?: T;
+  reference?: T;
   duree?: T;
   theme?: T;
   forpdf?: T;

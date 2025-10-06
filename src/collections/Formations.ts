@@ -34,10 +34,16 @@ export const Formations: CollectionConfig = {
       label: 'Date de début',
       type: 'date',
       required: true,
+      // admin: {
+      //   date: {
+      //     pickerAppearance: 'dayOnly',
+      //   },
+      // },
       admin: {
-        date: {
-          pickerAppearance: 'dayOnly',
-        },
+        hidden: true,
+        readOnly: true,
+        description: 'Déprécié — sera supprimé plus tard.',
+        date: { pickerAppearance: 'dayOnly' },
       },
     },
     {
@@ -45,12 +51,31 @@ export const Formations: CollectionConfig = {
       label: 'Date de fin',
       type: 'date',
       required: true,
+      // admin: {
+      //   date: {
+      //     pickerAppearance: 'dayOnly',
+      //   },
+      // },
       admin: {
-        date: {
-          pickerAppearance: 'dayOnly',
-        },
+        hidden: true,
+        readOnly: true,
+        description: 'Déprécié — sera supprimé plus tard.',
+        date: { pickerAppearance: 'dayOnly' },
       },
     },
+
+    {
+      name: 'reference',
+      label: 'Référence',
+      type: 'text',
+      unique: true, // creates a unique index via migration
+      required: false, // set to true later once data is backfilled
+      admin: {
+        placeholder: 'Ex: REF-2025-001',
+        description: 'Identifiant interne de la formation.',
+      },
+    },
+
     {
       name: 'duree',
       label: 'Durée',
@@ -58,6 +83,7 @@ export const Formations: CollectionConfig = {
       required: true,
       localized: true,
     },
+
     {
       name: 'theme',
       label: 'Thème',
