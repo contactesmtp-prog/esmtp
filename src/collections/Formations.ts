@@ -34,16 +34,10 @@ export const Formations: CollectionConfig = {
       label: 'Date de début',
       type: 'date',
       required: true,
-      // admin: {
-      //   date: {
-      //     pickerAppearance: 'dayOnly',
-      //   },
-      // },
       admin: {
-        hidden: true,
-        readOnly: true,
-        description: 'Déprécié — sera supprimé plus tard.',
-        date: { pickerAppearance: 'dayOnly' },
+        date: {
+          pickerAppearance: 'dayOnly',
+        },
       },
     },
     {
@@ -51,16 +45,10 @@ export const Formations: CollectionConfig = {
       label: 'Date de fin',
       type: 'date',
       required: true,
-      // admin: {
-      //   date: {
-      //     pickerAppearance: 'dayOnly',
-      //   },
-      // },
       admin: {
-        hidden: true,
-        readOnly: true,
-        description: 'Déprécié — sera supprimé plus tard.',
-        date: { pickerAppearance: 'dayOnly' },
+        date: {
+          pickerAppearance: 'dayOnly',
+        },
       },
     },
 

@@ -184,6 +184,6 @@ export default async function ContactPage({ params }: Args) {
 }
 
 export const metadata: Metadata = {
-  title: 'ESMTP | Contact Us', // 👈 fixed title
+  title: 'ESMTP | Contact Us',
   description: 'Welcome to ESMTP official website.',
 }
