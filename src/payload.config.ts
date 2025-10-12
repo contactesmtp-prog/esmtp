@@ -43,6 +43,12 @@ const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
 export default buildConfig({
+  routes: {
+    admin: '/a8f7d9-dashboard',
+    api: '/api', // optional, default is /api
+    graphQL: '/graphql', // optional
+    graphQLPlayground: '/graphql-playground',
+  },
   admin: {
     components: {
       // // The `BeforeLogin` component renders a message that you see while logging into your admin panel.
