@@ -17,7 +17,7 @@ export const Logo = ({ loading = 'lazy', priority = 'low', className }: Props) =
       fetchPriority={priority}
       decoding="async"
       className={clsx('h-10 w-auto object-contain', className)}
-      src="/1000057904.png"
+      src="/lastoneSure.png"
     />
   )
 }
